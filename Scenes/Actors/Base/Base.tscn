@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://ckwoitj26np6x"]
+
+[ext_resource type="Script" uid="uid://bk7vciglunjk8" path="res://Scenes/Actors/Base/Base.gd" id="1_c2yas"]
+[ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_vk0q6"]
+[ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_d0mm7"]
+[ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_qctcw"]
+[ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_1cv3e"]
+[ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="6_1cv3e"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c2yas"]
+radius = 250.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hnoul"]
+radius = 250.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qctcw"]
+radius = 500.0
+
+[node name="Base" type="StaticBody2D" unique_id=256515390]
+script = ExtResource("1_c2yas")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
+shape = SubResource("CircleShape2D_c2yas")
+
+[node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_vk0q6")]
+
+[node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_d0mm7")]
+max_health = 100.0
+
+[node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("6_1cv3e")]
+size = Vector2(200, 8)
+offset = Vector2(0, -300)
+
+[node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_1cv3e")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=571055425]
+shape = SubResource("CircleShape2D_hnoul")
+
+[node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("3_qctcw")]
+target_group = "team_a"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=2098343024]
+shape = SubResource("CircleShape2D_qctcw")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=596406266]
+one_shot = true
+
+[node name="MuzzleMarkerCenter" type="Marker2D" parent="." unique_id=1416383663]
+position = Vector2(300, 0)
+
+[node name="MuzzleMarkerLeft" type="Marker2D" parent="." unique_id=1693740245]
+position = Vector2(260, -125)
+
+[node name="MuzzleMarkerRight" type="Marker2D" parent="." unique_id=1313360256]
+position = Vector2(260, 125)

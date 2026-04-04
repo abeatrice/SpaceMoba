@@ -1,0 +1,59 @@
+[gd_scene format=3 uid="uid://bwtu1bhxbleg1"]
+
+[ext_resource type="Script" uid="uid://c12a265g60wac" path="res://Scenes/Actors/Minion/Minion.gd" id="1_bb0ru"]
+[ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="2_8rcmy"]
+[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_32q8u"]
+[ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_a7136"]
+[ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_32q8u"]
+[ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="4_da52b"]
+[ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
+points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8rcmy"]
+radius = 250.0
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_da52b"]
+points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_da52b"]
+radius = 36.0
+
+[node name="Minion" type="CharacterBody2D" unique_id=209382350]
+motion_mode = 1
+script = ExtResource("1_bb0ru")
+projectile_scene = ExtResource("2_32q8u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2015195464]
+shape = SubResource("ConvexPolygonShape2D_bb0ru")
+
+[node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_a7136")]
+
+[node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("4_da52b")]
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=2063097943]
+one_shot = true
+
+[node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("2_8rcmy")]
+target_group = "team_a"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=84961796]
+shape = SubResource("CircleShape2D_8rcmy")
+
+[node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_32q8u")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=112784783]
+shape = SubResource("ConvexPolygonShape2D_da52b")
+
+[node name="MuzzleMarker2D" type="Marker2D" parent="." unique_id=926127245]
+position = Vector2(30, 0)
+
+[node name="AvoidanceArea" type="Area2D" parent="." unique_id=184977763]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AvoidanceArea" unique_id=373703463]
+shape = SubResource("CircleShape2D_da52b")
+
+[node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("7_1i7ti")]
+size = Vector2(30, 4)

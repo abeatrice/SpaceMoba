@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://bwtu1bhxbleg1"]
+
+[ext_resource type="Script" uid="uid://c12a265g60wac" path="res://Scenes/Actors/Minion/Minion.gd" id="1_bb0ru"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
+points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
+
+[node name="Minion" type="CharacterBody2D" unique_id=209382350]
+script = ExtResource("1_bb0ru")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2015195464]
+shape = SubResource("ConvexPolygonShape2D_bb0ru")

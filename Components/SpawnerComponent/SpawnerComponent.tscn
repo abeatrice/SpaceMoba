@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://g16hs65a1q32"]
+
+[ext_resource type="Script" uid="uid://7nl4phh7p1uu" path="res://Components/SpawnerComponent/SpawnerComponent.gd" id="1_hkvfo"]
+
+[node name="SpawnerComponent" type="Marker2D" unique_id=1132137132]
+script = ExtResource("1_hkvfo")
+
+[node name="WaveTimer" type="Timer" parent="." unique_id=980216564]

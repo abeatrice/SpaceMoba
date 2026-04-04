@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dj5p8bj0b6kgp"]
+
+[ext_resource type="Script" uid="uid://bx0rgl71lwkem" path="res://Components/TeamComponent/TeamComponent.gd" id="1_0d2pe"]
+
+[node name="TeamComponent" type="Node" unique_id=852586776]
+script = ExtResource("1_0d2pe")

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bqlr826iv8hnu"]
+
+[ext_resource type="Script" uid="uid://bhrotmb3hcvcw" path="res://Components/HealthBarComponent/HealthBarComponent.gd" id="1_7fke4"]
+
+[node name="HealthBarComponent" type="Node2D" unique_id=1487073155]
+script = ExtResource("1_7fke4")

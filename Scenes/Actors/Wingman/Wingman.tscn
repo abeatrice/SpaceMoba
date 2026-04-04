@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://cxojeev5134un"]
+
+[ext_resource type="Script" uid="uid://b3lf2rjdpoypx" path="res://Scenes/Actors/Wingman/Wingman.gd" id="1_cdw6t"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
+points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+
+[node name="Wingman" type="CharacterBody2D" unique_id=392969111]
+motion_mode = 1
+script = ExtResource("1_cdw6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
+shape = SubResource("ConvexPolygonShape2D_fapo8")
+debug_color = Color(1, 1, 1, 1)

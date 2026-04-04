@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ddesng5rk5utn"]
+
+[ext_resource type="Script" uid="uid://bqid6i3eusic8" path="res://Scenes/Combat/Projectile/Projectile.gd" id="1_c1f7k"]
+[ext_resource type="PackedScene" uid="uid://6ckfbjrw6x1j" path="res://Components/HitboxComponent/HitboxComponent.tscn" id="2_tax78"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tvyaj"]
+radius = 5.0
+
+[node name="Projectile" type="Node2D" unique_id=711712543]
+z_index = 1000
+script = ExtResource("1_c1f7k")
+
+[node name="HitboxComponent" parent="." unique_id=1084907541 instance=ExtResource("2_tax78")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" unique_id=857348128]
+shape = SubResource("CircleShape2D_tvyaj")

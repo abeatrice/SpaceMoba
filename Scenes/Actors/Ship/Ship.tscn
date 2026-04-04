@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://2eh2hvslaefp"]
+
+[ext_resource type="Script" uid="uid://c8d2ys23xv0o1" path="res://Scenes/Actors/Ship/Ship.gd" id="1_fapo8"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
+points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+
+[node name="Ship" type="CharacterBody2D" unique_id=392969111]
+motion_mode = 1
+script = ExtResource("1_fapo8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
+shape = SubResource("ConvexPolygonShape2D_fapo8")
+debug_color = Color(1, 1, 1, 1)
