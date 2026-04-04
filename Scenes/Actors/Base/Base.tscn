@@ -25,7 +25,7 @@ shape = SubResource("CircleShape2D_c2yas")
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_vk0q6")]
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_d0mm7")]
-max_health = 100.0
+max_health = 1000.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("6_1cv3e")]
 size = Vector2(200, 8)
