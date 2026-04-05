@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_d0mm7"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_qctcw"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_1cv3e"]
+[ext_resource type="Script" uid="uid://c20s28wgd4jro" path="res://Components/TargetingComponent/TargetingComponent.gd" id="5_hnoul"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="6_1cv3e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_c2yas"]
@@ -30,6 +31,10 @@ max_health = 1000.0
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("6_1cv3e")]
 size = Vector2(200, 8)
 offset = Vector2(0, -300)
+
+[node name="TargetingComponent" type="Node2D" parent="." unique_id=1819425974]
+script = ExtResource("5_hnoul")
+metadata/_custom_type_script = "uid://c20s28wgd4jro"
 
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_1cv3e")]
 health_component = NodePath("../HealthComponent")

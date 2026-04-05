@@ -1,4 +1,3 @@
-@tool
 class_name TeamComponent
 extends Node
 
@@ -24,8 +23,22 @@ var colors = {
 		team = value
 		if is_inside_tree():
 			var parent = get_parent()
-			if parent.has_method("update_team_visuals"):
-				parent.update_team_visuals()
+			var detector = parent.get_node_or_null("EnemiesDetectorComponent")
+			sync_team_data(parent, detector)
+
+func sync_team_data(parent: Node2D, detector: DetectorComponent = null):
+	parent.remove_from_group("team_a")
+	parent.remove_from_group("team_b")
+	
+	if team == Team.A:
+		parent.add_to_group("team_a")
+	elif team == Team.B:
+		parent.add_to_group("team_b")
+		
+	if detector:
+		detector.target_group = get_enemy_group()
+	
+	parent.queue_redraw()
 
 func is_enemy(other_team: Team) -> bool:
 	if team == Team.A: return other_team == Team.B

@@ -1,4 +1,4 @@
-class_name Base
+class_name Fort
 extends StaticBody2D
 
 @export var projectile_scene: PackedScene
@@ -14,19 +14,30 @@ extends StaticBody2D
 @onready var health_bar: HealthBarComponent = $HealthBarComponent
 @onready var attack_timer: Timer = $AttackTimer
 @onready var targeting: TargetingComponent = $TargetingComponent
-@onready var muzzles = [$MuzzleMarkerCenter, $MuzzleMarkerLeft, $MuzzleMarkerRight]
+@onready var muzzles = [$MuzzleMarkerLeft, $MuzzleMarkerRight]
 
 var detector: DetectorComponent
 
 func _draw():
-	var draw_scale := 5.0
+	var draw_scale := 1.0
 	var primary_color = team_component.get_colors()["primary"]
 	var secondary_color = primary_color.darkened(0.5)
 
-	draw_line(Vector2.ZERO, Vector2(60, 0) * draw_scale, primary_color, 2 * draw_scale)
+	draw_line(Vector2.ZERO, Vector2(90, 0) * draw_scale, primary_color, 2 * draw_scale)
 
-	draw_circle(Vector2.ZERO, 50 * draw_scale, primary_color)
-	draw_circle(Vector2.ZERO, 48 * draw_scale, secondary_color)
+	draw_polygon([
+		Vector2(80, 0),
+		Vector2(0, -80),
+		Vector2(-80, 0),
+		Vector2(0, 80)
+	], [primary_color])
+	
+	draw_polygon([
+		Vector2(78, 0),
+		Vector2(0, -78),
+		Vector2(-78, 0),
+		Vector2(0, 78)
+	], [secondary_color])
 
 func _ready():
 	if team_from_inspector != TeamComponent.Team.NONE:

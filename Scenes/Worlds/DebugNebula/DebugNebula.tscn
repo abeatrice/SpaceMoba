@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://2eh2hvslaefp" path="res://Scenes/Actors/Ship/Ship.tscn" id="4_a4ruw"]
 [ext_resource type="PackedScene" uid="uid://ckwoitj26np6x" path="res://Scenes/Actors/Base/Base.tscn" id="4_kbp5y"]
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="5_vpgxp"]
+[ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="6_uhe6k"]
 
 [node name="DebugNebula" type="Node" unique_id=2004347515]
 
@@ -22,7 +23,7 @@ stretch_mode = 1
 metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=767733412]
-position = Vector2(9000, 3000)
+position = Vector2(8729, 3304)
 limit_left = 0
 limit_top = 0
 limit_right = 18000
@@ -30,7 +31,7 @@ limit_bottom = 6000
 position_smoothing_enabled = true
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("4_a4ruw")]
-position = Vector2(9000, 3000)
+position = Vector2(8729, 3304)
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship" unique_id=1681555719]
 remote_path = NodePath("../../Camera2D")
@@ -41,7 +42,7 @@ position = Vector2(8793, 2576)
 team_from_inspector = 1
 
 [node name="Minion2" parent="." unique_id=991963766 instance=ExtResource("2_vpgxp")]
-position = Vector2(8899, 3316)
+position = Vector2(8445, 3322)
 team_from_inspector = 1
 
 [node name="Enemy" parent="." unique_id=1819599488 instance=ExtResource("2_vpgxp")]
@@ -51,5 +52,18 @@ team_from_inspector = 2
 
 [node name="Base" parent="." unique_id=256515390 instance=ExtResource("4_kbp5y")]
 position = Vector2(9338, 3328)
+rotation = 3.1415927
+projectile_scene = ExtResource("5_vpgxp")
+team_from_inspector = 2
+
+[node name="FortB1" parent="." unique_id=1550830602 instance=ExtResource("6_uhe6k")]
+position = Vector2(8790, 3076)
+rotation = 3.1415927
+projectile_scene = ExtResource("5_vpgxp")
+team_from_inspector = 2
+
+[node name="FortB2" parent="." unique_id=354292813 instance=ExtResource("6_uhe6k")]
+position = Vector2(8790, 3550)
+rotation = 3.1415927
 projectile_scene = ExtResource("5_vpgxp")
 team_from_inspector = 2

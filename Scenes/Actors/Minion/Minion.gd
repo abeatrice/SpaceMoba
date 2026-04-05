@@ -1,4 +1,3 @@
-@tool
 class_name Minion
 extends CharacterBody2D
 
@@ -68,17 +67,7 @@ func _ensure_references():
 
 func update_team_visuals():
 	_ensure_references()
-	
-	remove_from_group("team_a")
-	remove_from_group("team_b")
-	if team_component.team == TeamComponent.Team.A:
-		add_to_group("team_a")
-	elif team_component.team == TeamComponent.Team.B:
-		add_to_group("team_b")
-	
-	detector.target_group = team_component.get_enemy_group()
-
-	queue_redraw()
+	team_component.sync_team_data(self, detector)
 
 func setup(new_team: TeamComponent.Team):
 	team_component = get_node("TeamComponent")

@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://m7vijpvh6e6l"]
+
+[ext_resource type="Script" uid="uid://0phldf70nr5k" path="res://Scenes/Actors/Fort/Fort.gd" id="1_amo8l"]
+[ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_t60gi"]
+[ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_olgeh"]
+[ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="4_4fbtn"]
+[ext_resource type="Script" uid="uid://c20s28wgd4jro" path="res://Components/TargetingComponent/TargetingComponent.gd" id="5_oxu2m"]
+[ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="6_1uwx4"]
+[ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
+points = PackedVector2Array(80, 0, 0, -80, -80, 0, 0, 80)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vct2u"]
+points = PackedVector2Array(80, 0, 0, -80, -80, 0, 0, 80)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7po6y"]
+radius = 200.0
+
+[node name="Fort" type="StaticBody2D" unique_id=256515390]
+script = ExtResource("1_amo8l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
+shape = SubResource("ConvexPolygonShape2D_7po6y")
+
+[node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_t60gi")]
+
+[node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_olgeh")]
+max_health = 500.0
+
+[node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("4_4fbtn")]
+size = Vector2(150, 4)
+offset = Vector2(0, -100)
+
+[node name="TargetingComponent" type="Node2D" parent="." unique_id=1819425974]
+script = ExtResource("5_oxu2m")
+metadata/_custom_type_script = "uid://c20s28wgd4jro"
+
+[node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("6_1uwx4")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=571055425]
+shape = SubResource("ConvexPolygonShape2D_vct2u")
+
+[node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("7_speva")]
+target_group = "team_a"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=2098343024]
+shape = SubResource("CircleShape2D_7po6y")
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=596406266]
+one_shot = true
+
+[node name="MuzzleMarkerLeft" type="Marker2D" parent="." unique_id=1693740245]
+position = Vector2(60, -60)
+
+[node name="MuzzleMarkerRight" type="Marker2D" parent="." unique_id=1313360256]
+position = Vector2(60, 60)
