@@ -3,6 +3,9 @@ extends Node
 
 enum Team { NONE, A, B, NEUTRAL }
 
+const LAYER_TEAM_A_HURTBOX = 2
+const LAYER_TEAM_B_HURTBOX = 4
+
 var colors = {
 	"A": {
 		"primary": Color.SKY_BLUE
@@ -26,7 +29,7 @@ var colors = {
 			var detector = parent.get_node_or_null("EnemiesDetectorComponent")
 			sync_team_data(parent, detector)
 
-func sync_team_data(parent: Node2D, detector: DetectorComponent = null):
+func _manage_groups(parent: Node2D, detector: DetectorComponent = null):
 	parent.remove_from_group("team_a")
 	parent.remove_from_group("team_b")
 	
@@ -37,6 +40,24 @@ func sync_team_data(parent: Node2D, detector: DetectorComponent = null):
 		
 	if detector:
 		detector.target_group = get_enemy_group()
+
+func sync_team_data(parent: Node2D, detector: DetectorComponent = null):
+	_manage_groups(parent, detector)
+
+	var hurtbox: HurtboxComponent = parent.get_node_or_null("HurtboxComponent")
+	
+	if team == Team.A:
+		if hurtbox:
+			hurtbox.collision_layer = LAYER_TEAM_A_HURTBOX
+			hurtbox.collision_mask = 0
+		if detector:
+			detector.collision_mask = LAYER_TEAM_B_HURTBOX
+	elif team == Team.B:
+		if hurtbox:
+			hurtbox.collision_layer = LAYER_TEAM_B_HURTBOX
+			hurtbox.collision_mask = 0
+		if detector:
+			detector.collision_mask = LAYER_TEAM_A_HURTBOX
 	
 	parent.queue_redraw()
 

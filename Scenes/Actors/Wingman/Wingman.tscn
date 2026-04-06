@@ -1,6 +1,8 @@
 [gd_scene format=3 uid="uid://cxojeev5134un"]
 
 [ext_resource type="Script" uid="uid://b3lf2rjdpoypx" path="res://Scenes/Actors/Wingman/Wingman.gd" id="1_cdw6t"]
+[ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_ln2ng"]
+[ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_x66b8"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
 points = PackedVector2Array(80, 0, 0, 20, 0, -20)
@@ -12,3 +14,7 @@ script = ExtResource("1_cdw6t")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
 shape = SubResource("ConvexPolygonShape2D_fapo8")
 debug_color = Color(1, 1, 1, 1)
+
+[node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_ln2ng")]
+
+[node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("3_x66b8")]

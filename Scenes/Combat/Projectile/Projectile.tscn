@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://6ckfbjrw6x1j" path="res://Components/HitboxComponent/HitboxComponent.tscn" id="2_tax78"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_tvyaj"]
-radius = 5.0
+radius = 3.0
 
 [node name="Projectile" type="Node2D" unique_id=711712543]
 z_index = 1000

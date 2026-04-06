@@ -69,6 +69,7 @@ reverse_direction = true
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_4r1pt")]
 position = Vector2(9000, 3000)
+team_from_inspector = 1
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship" unique_id=1681555719]
 remote_path = NodePath("../../Camera2D")
@@ -76,6 +77,7 @@ update_rotation = false
 
 [node name="Wingman" parent="." unique_id=560503253 node_paths=PackedStringArray("leader") instance=ExtResource("3_4r1pt")]
 leader = NodePath("../Ship")
+team_from_inspector = 1
 
 [node name="BaseB1" parent="." unique_id=256515390 instance=ExtResource("10_wiegf")]
 position = Vector2(10500, 3000)

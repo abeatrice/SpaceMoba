@@ -1,18 +1,23 @@
 class_name Projectile
 extends Node2D
 
-@export var speed: float = 400.0
+@export var speed: float = 1000.0
 @export var damage: float = 10.0
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 
 var target: Node2D = null
+var is_dying: bool = false
+var alpha: float = 1.0:
+	set(value):
+		alpha = value
+		queue_redraw()
 
 func _draw():
-	draw_circle(Vector2.ZERO, 5, Color.WHITE)
+	draw_circle(Vector2.ZERO, 3, Color(1, 1, 1, alpha))
 
 func _ready():
-	hitbox_component.area_entered.connect(_on_hitbox_component_area_entered)
+	hitbox_component.hit_confirmed.connect(_on_hit_confirmed)
 
 func _physics_process(delta):
 	if is_instance_valid(target):
@@ -20,10 +25,15 @@ func _physics_process(delta):
 		global_position += direction * speed * delta
 		rotation = direction.angle()
 	else:
-		queue_free()
+		if not is_dying:
+			_start_fizzle_timer()
+		global_position += Vector2.RIGHT.rotated(rotation) * speed * delta
 
-func _on_hitbox_component_area_entered(area: Node2D):
-	if area is HurtboxComponent:
-		var target_group = hitbox_component.target_group
-		if target_group == "" or area.get_parent().is_in_group(target_group):
-			queue_free()
+func _start_fizzle_timer():
+	is_dying = true
+	var tween = create_tween()
+	tween.tween_property(self, "alpha", 0.0, 1.0)
+	tween.finished.connect(queue_free)
+
+func _on_hit_confirmed():
+	queue_free()

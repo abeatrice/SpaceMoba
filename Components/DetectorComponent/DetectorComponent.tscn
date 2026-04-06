@@ -4,4 +4,3 @@
 
 [node name="DetectorComponent" type="Area2D" unique_id=1614452799]
 script = ExtResource("1_y7oto")
-target_group = null

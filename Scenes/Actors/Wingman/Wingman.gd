@@ -1,20 +1,48 @@
+class_name Wingman
 extends CharacterBody2D
 
 @export var speed = 400.0
 @export var stopping_distance: float = 5.0
 @export var rotation_stopping_distance: float = 10.0
 @export var turn_speed = PI * 3
-
 @export var leader: Ship
+@export var team_from_inspector: TeamComponent.Team = TeamComponent.Team.NONE:
+	set(value):
+		team_from_inspector = value
+		if is_inside_tree() and team_component:
+			team_component.team = value
+			update_team_visuals()
+
+@onready var team_component: TeamComponent = $TeamComponent
+
+var detector: DetectorComponent
 
 func _draw():
-	draw_polygon([
-		Vector2(80, 0),
-		Vector2(0, 20),
-		Vector2(0, -20)
-	], [Color.CRIMSON])
+	var draw_scale := 1.0
+	var primary_color = team_component.get_colors()["primary"]
+	var secondary_color = primary_color.darkened(0.5)
+
+	var points = PackedVector2Array([
+		Vector2(80, 0) * draw_scale,
+		Vector2(0, 25) * draw_scale,
+		Vector2(0, -25) * draw_scale,
+		Vector2(80, 0) * draw_scale,
+	])
+
+	draw_polygon(points, [secondary_color])
+	draw_polyline(points, primary_color, 2 * draw_scale, true)
+
+func update_team_visuals():
+	_ensure_references()
+	team_component.sync_team_data(self, detector)
+
+func _ensure_references():
+	if not detector: detector = get_node("EnemiesDetectorComponent")
 
 func _ready():
+	if team_from_inspector != TeamComponent.Team.NONE:
+		team_component.team = team_from_inspector
+	update_team_visuals()
 	global_position = leader.get_wingman_target_position()
 	rotation = leader.get_rotation()
 

@@ -19,14 +19,27 @@ extends StaticBody2D
 var detector: DetectorComponent
 
 func _draw():
-	var draw_scale := 5.0
+	var draw_scale := 1.0
 	var primary_color = team_component.get_colors()["primary"]
 	var secondary_color = primary_color.darkened(0.5)
 
-	draw_line(Vector2.ZERO, Vector2(60, 0) * draw_scale, primary_color, 2 * draw_scale)
-
-	draw_circle(Vector2.ZERO, 50 * draw_scale, primary_color)
-	draw_circle(Vector2.ZERO, 48 * draw_scale, secondary_color)
+	draw_circle(Vector2.ZERO, 250 * draw_scale, secondary_color, true, -1.0, false)
+	draw_circle(Vector2.ZERO, 250 * draw_scale, primary_color, false, 4 * draw_scale, true)
+	draw_line(Vector2.ZERO, Vector2(260, 0) * draw_scale, primary_color, 4 * draw_scale, true)
+	
+func draw_smooth_circle(center: Vector2, radius: float, color: Color, thickness: float = -1.0):
+	var points = PackedVector2Array()
+	var segments = 64 # Increase for smoother circles
+	for i in range(segments + 1):
+		var angle = i * TAU / segments
+		points.append(center + Vector2(cos(angle), sin(angle)) * radius)
+	
+	if thickness < 0:
+		# Draw the solid fill
+		draw_polygon(points, [color])
+	else:
+		# Draw the smooth anti-aliased outline
+		draw_polyline(points, color, thickness, true)
 
 func _ready():
 	if team_from_inspector != TeamComponent.Team.NONE:
@@ -59,7 +72,12 @@ func _fire_projectiles():
 		get_tree().current_scene.add_child(p)
 		p.global_position = m.global_position
 		p.target = targeting.current_target
-		p.get_node("HitboxComponent").target_group = team_component.get_enemy_group()
+		var hb: HitboxComponent = p.get_node("HitboxComponent")
+		hb.target_group = team_component.get_enemy_group()
+		if team_component.team == TeamComponent.Team.A:
+			hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
+		else:
+			hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
 
 func _on_died():
 	queue_free()

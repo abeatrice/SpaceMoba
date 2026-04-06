@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://bn41katp000sd"]
+
+[ext_resource type="PackedScene" uid="uid://2eh2hvslaefp" path="res://Scenes/Actors/Ship/Ship.tscn" id="2_bafyo"]
+[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="5_88kut"]
+[ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="6_asx8y"]
+
+[node name="Debug" type="Node" unique_id=2004347515]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=767733412]
+position = Vector2(964, 544)
+limit_left = 0
+limit_top = 0
+limit_right = 18000
+limit_bottom = 6000
+position_smoothing_enabled = true
+
+[node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_bafyo")]
+position = Vector2(964, 544)
+team_from_inspector = 1
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship" unique_id=1681555719]
+remote_path = NodePath("../../Camera2D")
+update_rotation = false
+
+[node name="FortB1" parent="." unique_id=1550830602 instance=ExtResource("6_asx8y")]
+position = Vector2(1270, 540)
+rotation = 3.1415927
+projectile_scene = ExtResource("5_88kut")
+team_from_inspector = 2

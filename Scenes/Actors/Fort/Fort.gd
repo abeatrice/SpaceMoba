@@ -23,21 +23,17 @@ func _draw():
 	var primary_color = team_component.get_colors()["primary"]
 	var secondary_color = primary_color.darkened(0.5)
 
-	draw_line(Vector2.ZERO, Vector2(90, 0) * draw_scale, primary_color, 2 * draw_scale)
+	var points = PackedVector2Array([
+		Vector2(80, 0) * draw_scale,
+		Vector2(0, -80) * draw_scale,
+		Vector2(-80, 0) * draw_scale,
+		Vector2(0, 80) * draw_scale,
+		Vector2(80, 0) * draw_scale,
+	])
 
-	draw_polygon([
-		Vector2(80, 0),
-		Vector2(0, -80),
-		Vector2(-80, 0),
-		Vector2(0, 80)
-	], [primary_color])
-	
-	draw_polygon([
-		Vector2(78, 0),
-		Vector2(0, -78),
-		Vector2(-78, 0),
-		Vector2(0, 78)
-	], [secondary_color])
+	draw_polygon(points, [secondary_color])
+	draw_polyline(points, primary_color, 2 * draw_scale, true)
+	draw_line(Vector2.ZERO, Vector2(90, 0) * draw_scale, primary_color, 4 * draw_scale, true)
 
 func _ready():
 	if team_from_inspector != TeamComponent.Team.NONE:
@@ -70,7 +66,12 @@ func _fire_projectiles():
 		get_tree().current_scene.add_child(p)
 		p.global_position = m.global_position
 		p.target = targeting.current_target
-		p.get_node("HitboxComponent").target_group = team_component.get_enemy_group()
+		var hb: HitboxComponent = p.get_node("HitboxComponent")
+		hb.target_group = team_component.get_enemy_group()
+		if team_component.team == TeamComponent.Team.A:
+			hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
+		else:
+			hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
 
 func _on_died():
 	queue_free()

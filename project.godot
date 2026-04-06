@@ -75,7 +75,10 @@ click_to_move={
 
 [layer_names]
 
-2d_physics/layer_3="Hurtbox"
+2d_physics/layer_1="Detectors"
+2d_physics/layer_2="Team_A_HurtBox"
+2d_physics/layer_3="Team_B_Hurtbox"
+2d_physics/layer_4="World_Physics"
 
 [physics]
 

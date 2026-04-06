@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://0phldf70nr5k" path="res://Scenes/Actors/Fort/Fort.gd" id="1_amo8l"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_t60gi"]
+[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_vct2u"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_olgeh"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="4_4fbtn"]
 [ext_resource type="Script" uid="uid://c20s28wgd4jro" path="res://Components/TargetingComponent/TargetingComponent.gd" id="5_oxu2m"]
@@ -19,6 +20,7 @@ radius = 200.0
 
 [node name="Fort" type="StaticBody2D" unique_id=256515390]
 script = ExtResource("1_amo8l")
+projectile_scene = ExtResource("2_vct2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
 shape = SubResource("ConvexPolygonShape2D_7po6y")
@@ -29,7 +31,7 @@ shape = SubResource("ConvexPolygonShape2D_7po6y")
 max_health = 500.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("4_4fbtn")]
-size = Vector2(150, 4)
+size = Vector2(150, 6)
 offset = Vector2(0, -100)
 
 [node name="TargetingComponent" type="Node2D" parent="." unique_id=1819425974]

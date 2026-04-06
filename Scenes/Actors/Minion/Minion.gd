@@ -23,27 +23,21 @@ var path_controller: PathFollow2D
 var current_target: Node2D = null
 
 func _draw():
-	var draw_scale := 0.3
+	var draw_scale := 1
 	var primary_color = team_component.get_colors()["primary"]
 	var secondary_color = primary_color.darkened(0.5)
 
-	draw_line(Vector2.ZERO, Vector2(80, 0) * draw_scale, primary_color, 2 * draw_scale)
+	var points = PackedVector2Array([
+		Vector2(0, -18) * draw_scale,
+		Vector2(18, 0) * draw_scale,
+		Vector2(0, 18) * draw_scale,
+		Vector2(-18, 0) * draw_scale,
+		Vector2(0, -18) * draw_scale,
+	])
 
-	# Outer diamond
-	draw_polygon([
-		Vector2(0, -60) * draw_scale,
-		Vector2(60, 0) * draw_scale,
-		Vector2(0, 60) * draw_scale,
-		Vector2(-60, 0) * draw_scale
-	], [primary_color])
-
-	## Inner diamond
-	draw_polygon([
-		Vector2(0, -50) * draw_scale,
-		Vector2(50, 0) * draw_scale,
-		Vector2(0, 50) * draw_scale,
-		Vector2(-50, 0) * draw_scale
-	], [secondary_color])
+	draw_polygon(points, [secondary_color])
+	draw_polyline(points, primary_color, .5 * draw_scale, true)
+	draw_line(Vector2.ZERO, Vector2(25, 0) * draw_scale, primary_color, 1.5 * draw_scale, true)
 
 func _ready():
 	_ensure_references()
@@ -140,8 +134,12 @@ func _fire_projectile():
 	p.target = current_target
 	p.damage = 10.0
 	
-	var hb = p.get_node("HitboxComponent")
+	var hb: HitboxComponent = p.get_node("HitboxComponent")
 	hb.target_group = team_component.get_enemy_group()
+	if team_component.team == TeamComponent.Team.A:
+		hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
+	else:
+		hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
 
 func _on_target_found(target: Node2D):
 	if is_instance_valid(target):

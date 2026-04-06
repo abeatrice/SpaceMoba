@@ -1,8 +1,15 @@
 [gd_scene format=3 uid="uid://2eh2hvslaefp"]
 
 [ext_resource type="Script" uid="uid://c8d2ys23xv0o1" path="res://Scenes/Actors/Ship/Ship.gd" id="1_fapo8"]
+[ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_cx01u"]
+[ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
+[ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
+[ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
+points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_af0h4"]
 points = PackedVector2Array(80, 0, 0, 20, 0, -20)
 
 [node name="Ship" type="CharacterBody2D" unique_id=392969111]
@@ -12,3 +19,18 @@ script = ExtResource("1_fapo8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
 shape = SubResource("ConvexPolygonShape2D_fapo8")
 debug_color = Color(1, 1, 1, 1)
+
+[node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_cx01u")]
+
+[node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_uin23")]
+max_health = 2000.0
+
+[node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_el4xe")]
+health_component = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1629476361]
+shape = SubResource("ConvexPolygonShape2D_af0h4")
+
+[node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("5_4kg1j")]
+size = Vector2(80, 8)
+offset = Vector2(0, -80)

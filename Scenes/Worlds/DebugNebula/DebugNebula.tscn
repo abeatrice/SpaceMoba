@@ -32,38 +32,45 @@ position_smoothing_enabled = true
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("4_a4ruw")]
 position = Vector2(8729, 3304)
+team_from_inspector = 1
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship" unique_id=1681555719]
 remote_path = NodePath("../../Camera2D")
 update_rotation = false
 
 [node name="Minion" parent="." unique_id=209382350 instance=ExtResource("2_vpgxp")]
-position = Vector2(8793, 2576)
+position = Vector2(8933, 1730)
 team_from_inspector = 1
 
 [node name="Minion2" parent="." unique_id=991963766 instance=ExtResource("2_vpgxp")]
-position = Vector2(8445, 3322)
+position = Vector2(8585, 2476)
 team_from_inspector = 1
 
 [node name="Enemy" parent="." unique_id=1819599488 instance=ExtResource("2_vpgxp")]
-position = Vector2(9237, 2575)
+position = Vector2(9377, 1729)
 rotation = 3.1415927
 team_from_inspector = 2
 
 [node name="Base" parent="." unique_id=256515390 instance=ExtResource("4_kbp5y")]
-position = Vector2(9338, 3328)
+position = Vector2(9478, 2482)
 rotation = 3.1415927
 projectile_scene = ExtResource("5_vpgxp")
 team_from_inspector = 2
 
 [node name="FortB1" parent="." unique_id=1550830602 instance=ExtResource("6_uhe6k")]
-position = Vector2(8790, 3076)
+position = Vector2(8930, 2230)
 rotation = 3.1415927
 projectile_scene = ExtResource("5_vpgxp")
 team_from_inspector = 2
 
 [node name="FortB2" parent="." unique_id=354292813 instance=ExtResource("6_uhe6k")]
-position = Vector2(8790, 3550)
+position = Vector2(8930, 2704)
+rotation = 3.1415927
+projectile_scene = ExtResource("5_vpgxp")
+team_from_inspector = 2
+
+[node name="FortB3" parent="." unique_id=1291242690 instance=ExtResource("6_uhe6k")]
+position = Vector2(8935, 3301)
 rotation = 3.1415927
 projectile_scene = ExtResource("5_vpgxp")
 team_from_inspector = 2
