@@ -14,13 +14,13 @@ extends CharacterBody2D
 @onready var attack_timer = $AttackTimer
 @onready var team_component: TeamComponent = $TeamComponent
 @onready var health_bar: HealthBarComponent = $HealthBarComponent
+@onready var targeting: TargetingComponent = $TargetingComponent
 
 var detector: DetectorComponent
-var muzzle_marker_2d: Marker2D
+var muzzle_marker: Marker2D
 
 var is_reversed: bool = false
 var path_controller: PathFollow2D
-var current_target: Node2D = null
 
 func _draw():
 	var draw_scale := 1
@@ -49,15 +49,13 @@ func _ready():
 	
 	health_component.died.connect(_on_died)
 	health_component.health_changed.connect(_on_health_changed)
-	detector.target_found.connect(_on_target_found)
-	detector.target_lost.connect(_on_target_lost)
 	
 	health_bar.team = team_component.team
 	health_bar.update_health(health_component.current_health, health_component.max_health)
 
 func _ensure_references():
 	if not detector: detector = get_node("EnemiesDetectorComponent")
-	if not muzzle_marker_2d: muzzle_marker_2d = get_node("MuzzleMarker2D")
+	if not muzzle_marker: muzzle_marker = get_node("MuzzleMarker2D")
 
 func update_team_visuals():
 	_ensure_references()
@@ -87,15 +85,14 @@ func get_avoidance_velocity() -> Vector2:
 	return push_vector.normalized() * (move_speed * 0.5)
 
 func _physics_process(delta):
-	if current_target and is_instance_valid(current_target):
+	if targeting.is_target_valid():
 		_attack_state(delta)
 	else:
 		_move_state(delta)
 
 func _attack_state(_delta):
-	if not is_instance_valid(current_target): return
-
-	var dir = global_position.direction_to(current_target.global_position)
+	if not targeting.is_target_valid(): return
+	var dir = targeting.get_dir_to_target()
 	rotation = lerp_angle(rotation, dir.angle(), 0.1)
 	
 	velocity = get_avoidance_velocity()
@@ -129,28 +126,9 @@ func _move_state(delta):
 func _fire_projectile():
 	var p = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(p)
-	
-	p.global_position = muzzle_marker_2d.global_position
-	p.target = current_target
-	p.damage = 10.0
-	
-	var hb: HitboxComponent = p.get_node("HitboxComponent")
-	hb.target_group = team_component.get_enemy_group()
-	if team_component.team == TeamComponent.Team.A:
-		hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
-	else:
-		hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
-
-func _on_target_found(target: Node2D):
-	if is_instance_valid(target):
-		current_target = target
-
-func _on_target_lost(_target: Node2D):
-	current_target = null
+	p.init(muzzle_marker.global_position, targeting.current_target)
 
 func _on_died():
-	#spawn_death_particles()
-	
 	if path_controller:
 		path_controller.queue_free()
 	else:

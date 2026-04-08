@@ -5,9 +5,9 @@
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_vct2u"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_olgeh"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="4_4fbtn"]
-[ext_resource type="Script" uid="uid://c20s28wgd4jro" path="res://Components/TargetingComponent/TargetingComponent.gd" id="5_oxu2m"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="6_1uwx4"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
+[ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
 points = PackedVector2Array(80, 0, 0, -80, -80, 0, 0, 80)
@@ -34,10 +34,6 @@ max_health = 500.0
 size = Vector2(150, 6)
 offset = Vector2(0, -100)
 
-[node name="TargetingComponent" type="Node2D" parent="." unique_id=1819425974]
-script = ExtResource("5_oxu2m")
-metadata/_custom_type_script = "uid://c20s28wgd4jro"
-
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("6_1uwx4")]
 health_component = NodePath("../HealthComponent")
 
@@ -58,3 +54,5 @@ position = Vector2(60, -60)
 
 [node name="MuzzleMarkerRight" type="Marker2D" parent="." unique_id=1313360256]
 position = Vector2(60, 60)
+
+[node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_vct2u")]

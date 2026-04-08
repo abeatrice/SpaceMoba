@@ -70,14 +70,7 @@ func _fire_projectiles():
 	for m in muzzles:
 		var p = projectile_scene.instantiate()
 		get_tree().current_scene.add_child(p)
-		p.global_position = m.global_position
-		p.target = targeting.current_target
-		var hb: HitboxComponent = p.get_node("HitboxComponent")
-		hb.target_group = team_component.get_enemy_group()
-		if team_component.team == TeamComponent.Team.A:
-			hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
-		else:
-			hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
+		p.init(m.global_position, targeting.current_target)
 
 func _on_died():
 	queue_free()

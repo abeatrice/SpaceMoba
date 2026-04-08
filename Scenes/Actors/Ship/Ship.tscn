@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://2eh2hvslaefp"]
 
 [ext_resource type="Script" uid="uid://c8d2ys23xv0o1" path="res://Scenes/Actors/Ship/Ship.gd" id="1_fapo8"]
+[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_cx01u"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
+[ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
 points = PackedVector2Array(80, 0, 0, 20, 0, -20)
@@ -15,6 +17,7 @@ points = PackedVector2Array(80, 0, 0, 20, 0, -20)
 [node name="Ship" type="CharacterBody2D" unique_id=392969111]
 motion_mode = 1
 script = ExtResource("1_fapo8")
+projectile_scene = ExtResource("2_4kg1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
 shape = SubResource("ConvexPolygonShape2D_fapo8")
@@ -34,3 +37,11 @@ shape = SubResource("ConvexPolygonShape2D_af0h4")
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("5_4kg1j")]
 size = Vector2(80, 8)
 offset = Vector2(0, -80)
+
+[node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("6_el4xe")]
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=87743990]
+one_shot = true
+
+[node name="MuzzleMarker" type="Marker2D" parent="." unique_id=2110633799]
+position = Vector2(90, 0)

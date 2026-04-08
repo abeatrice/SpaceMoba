@@ -66,6 +66,15 @@ func is_enemy(other_team: Team) -> bool:
 	if team == Team.B: return other_team == Team.A
 	return false
 
+func get_team_hurtbox_layer():
+	return LAYER_TEAM_A_HURTBOX if team == Team.A else LAYER_TEAM_B_HURTBOX
+
+func get_enemy_hurtbox_layer():
+	return LAYER_TEAM_B_HURTBOX if team == Team.A else LAYER_TEAM_A_HURTBOX
+
+func get_team_group() -> String:
+	return "team_a" if team == Team.A else "team_b"
+
 func get_enemy_group() -> String:
 	return "team_b" if team == Team.A else "team_a"
 

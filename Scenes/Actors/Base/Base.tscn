@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://ckwoitj26np6x"]
 
 [ext_resource type="Script" uid="uid://bk7vciglunjk8" path="res://Scenes/Actors/Base/Base.gd" id="1_c2yas"]
+[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_63s53"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_vk0q6"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_d0mm7"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_qctcw"]
@@ -19,6 +20,7 @@ radius = 500.0
 
 [node name="Base" type="StaticBody2D" unique_id=256515390]
 script = ExtResource("1_c2yas")
+projectile_scene = ExtResource("2_63s53")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
 shape = SubResource("CircleShape2D_c2yas")

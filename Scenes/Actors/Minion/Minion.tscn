@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_32q8u"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="4_da52b"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
+[ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
 points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
@@ -57,3 +58,5 @@ shape = SubResource("CircleShape2D_da52b")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("7_1i7ti")]
 size = Vector2(30, 4)
+
+[node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_355fq")]
