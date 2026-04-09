@@ -10,16 +10,16 @@
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
-points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
+points = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8rcmy"]
-radius = 250.0
+radius = 256.0
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_da52b"]
-points = PackedVector2Array(0, -18, 18, 0, 0, 18, -18, 0)
+points = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_da52b"]
-radius = 36.0
+radius = 32.0
 
 [node name="Minion" type="CharacterBody2D" unique_id=209382350]
 motion_mode = 1
@@ -49,7 +49,7 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("ConvexPolygonShape2D_da52b")
 
 [node name="MuzzleMarker2D" type="Marker2D" parent="." unique_id=926127245]
-position = Vector2(30, 0)
+position = Vector2(19, 0)
 
 [node name="AvoidanceArea" type="Area2D" parent="." unique_id=184977763]
 
@@ -58,5 +58,6 @@ shape = SubResource("CircleShape2D_da52b")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("7_1i7ti")]
 size = Vector2(30, 4)
+offset = Vector2(0, -32)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_355fq")]

@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://g16hs65a1q32" path="res://Components/SpawnerComponent/SpawnerComponent.tscn" id="7_jpt7o"]
 [ext_resource type="PackedScene" uid="uid://ckwoitj26np6x" path="res://Scenes/Actors/Base/Base.tscn" id="10_wiegf"]
 [ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="10_yxasx"]
-[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="11_5jd51"]
 
 [sub_resource type="Curve2D" id="Curve2D_4r1pt"]
 _data = {
@@ -79,57 +78,29 @@ update_rotation = false
 leader = NodePath("../Ship")
 team_from_inspector = 1
 
-[node name="BaseB1" parent="." unique_id=256515390 instance=ExtResource("10_wiegf")]
-position = Vector2(10500, 3000)
-rotation = 3.1415927
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 2
-
-[node name="BaseB2" parent="." unique_id=93440013 instance=ExtResource("10_wiegf")]
-position = Vector2(13500, 3000)
-rotation = 3.1415927
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 2
-
-[node name="BaseB3" parent="." unique_id=1035623360 instance=ExtResource("10_wiegf")]
-position = Vector2(16500, 3000)
-rotation = 3.1415927
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 2
-
 [node name="BaseA1" parent="." unique_id=2032666184 instance=ExtResource("10_wiegf")]
-position = Vector2(7500, 3000)
-projectile_scene = ExtResource("11_5jd51")
+position = Vector2(6867, 3000)
 team_from_inspector = 1
-
-[node name="BaseA2" parent="." unique_id=504006192 instance=ExtResource("10_wiegf")]
-position = Vector2(4500, 3000)
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 1
-
-[node name="BaseA3" parent="." unique_id=1619613746 instance=ExtResource("10_wiegf")]
-position = Vector2(1500, 3000)
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 1
-
-[node name="FortB1_1" parent="." unique_id=1467339760 instance=ExtResource("10_yxasx")]
-position = Vector2(9700, 2800)
-rotation = 3.1415927
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 2
-
-[node name="FortB1_2" parent="." unique_id=2004650580 instance=ExtResource("10_yxasx")]
-position = Vector2(9700, 3200)
-rotation = 3.1415927
-projectile_scene = ExtResource("11_5jd51")
-team_from_inspector = 2
 
 [node name="FortA1_1" parent="." unique_id=818815620 instance=ExtResource("10_yxasx")]
-position = Vector2(8300, 2800)
-projectile_scene = ExtResource("11_5jd51")
+position = Vector2(7650, 2900)
 team_from_inspector = 1
 
 [node name="FortA1_2" parent="." unique_id=1251148329 instance=ExtResource("10_yxasx")]
-position = Vector2(8300, 3200)
-projectile_scene = ExtResource("11_5jd51")
+position = Vector2(7650, 3100)
 team_from_inspector = 1
+
+[node name="BaseB1" parent="." unique_id=256515390 instance=ExtResource("10_wiegf")]
+position = Vector2(11130, 3000)
+rotation = 3.1415927
+team_from_inspector = 2
+
+[node name="FortB1_1" parent="." unique_id=1467339760 instance=ExtResource("10_yxasx")]
+position = Vector2(10350, 2900)
+rotation = 3.1415927
+team_from_inspector = 2
+
+[node name="FortB1_2" parent="." unique_id=2004650580 instance=ExtResource("10_yxasx")]
+position = Vector2(10350, 3100)
+rotation = 3.1415927
+team_from_inspector = 2

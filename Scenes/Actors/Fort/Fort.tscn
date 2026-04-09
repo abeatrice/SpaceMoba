@@ -10,13 +10,13 @@
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
-points = PackedVector2Array(80, 0, 0, -80, -80, 0, 0, 80)
+points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vct2u"]
-points = PackedVector2Array(80, 0, 0, -80, -80, 0, 0, 80)
+points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7po6y"]
-radius = 200.0
+radius = 256.0
 
 [node name="Fort" type="StaticBody2D" unique_id=256515390]
 script = ExtResource("1_amo8l")
@@ -31,8 +31,8 @@ shape = SubResource("ConvexPolygonShape2D_7po6y")
 max_health = 500.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("4_4fbtn")]
-size = Vector2(150, 6)
-offset = Vector2(0, -100)
+size = Vector2(64, 6)
+offset = Vector2(0, -64)
 
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("6_1uwx4")]
 health_component = NodePath("../HealthComponent")
@@ -50,9 +50,9 @@ shape = SubResource("CircleShape2D_7po6y")
 one_shot = true
 
 [node name="MuzzleMarkerLeft" type="Marker2D" parent="." unique_id=1693740245]
-position = Vector2(60, -60)
+position = Vector2(16, -16)
 
 [node name="MuzzleMarkerRight" type="Marker2D" parent="." unique_id=1313360256]
-position = Vector2(60, 60)
+position = Vector2(16, 16)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_vct2u")]

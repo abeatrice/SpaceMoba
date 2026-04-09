@@ -9,10 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
-points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_af0h4"]
-points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 
 [node name="Ship" type="CharacterBody2D" unique_id=392969111]
 motion_mode = 1
@@ -35,8 +35,8 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("ConvexPolygonShape2D_af0h4")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("5_4kg1j")]
-size = Vector2(80, 8)
-offset = Vector2(0, -80)
+size = Vector2(64, 6)
+offset = Vector2(0, -64)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("6_el4xe")]
 
@@ -44,4 +44,4 @@ offset = Vector2(0, -80)
 one_shot = true
 
 [node name="MuzzleMarker" type="Marker2D" parent="." unique_id=2110633799]
-position = Vector2(90, 0)
+position = Vector2(41, 0)

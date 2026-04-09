@@ -23,9 +23,9 @@ func _draw():
 	var primary_color = team_component.get_colors()["primary"]
 	var secondary_color = primary_color.darkened(0.5)
 
-	draw_circle(Vector2.ZERO, 250 * draw_scale, secondary_color, true, -1.0, false)
-	draw_circle(Vector2.ZERO, 250 * draw_scale, primary_color, false, 4 * draw_scale, true)
-	draw_line(Vector2.ZERO, Vector2(260, 0) * draw_scale, primary_color, 4 * draw_scale, true)
+	draw_circle(Vector2.ZERO, 128 * draw_scale, secondary_color, true, -1.0, false)
+	draw_circle(Vector2.ZERO, 128 * draw_scale, primary_color, false, 4 * draw_scale, true)
+	draw_line(Vector2.ZERO, Vector2(130, 0) * draw_scale, primary_color, 4 * draw_scale, true)
 	
 func draw_smooth_circle(center: Vector2, radius: float, color: Color, thickness: float = -1.0):
 	var points = PackedVector2Array()

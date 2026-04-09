@@ -7,6 +7,7 @@ enum Action { IDLE, MOVING, ATTACKING }
 @export var turn_speed: float = PI * 3
 @export var stopping_distance: float = 5.0
 @export var rotation_stopping_distance: float = 10.0
+@export	var attack_range: float = 128.0
 @export var projectile_scene: PackedScene
 @export var team_from_inspector: TeamComponent.Team = TeamComponent.Team.NONE:
 	set(value):
@@ -33,10 +34,10 @@ func _draw():
 	var secondary_color = primary_color.darkened(0.5)
 	
 	var points = PackedVector2Array([
-		Vector2(80, 0) * draw_scale,
-		Vector2(0, 25) * draw_scale,
-		Vector2(0, -25) * draw_scale,
-		Vector2(80, 0) * draw_scale,
+		Vector2(32, 0) * draw_scale,
+		Vector2(-32, 20) * draw_scale,
+		Vector2(-32, -20) * draw_scale,
+		Vector2(32, 0) * draw_scale,
 	])
 
 	draw_polygon(points, [secondary_color])
@@ -119,7 +120,6 @@ func _handle_attack_logic(delta):
 		return
 
 	var distance = targeting.get_dist_to_target_edge()
-	var attack_range = 400.0
 
 	var direction = targeting.get_dir_to_target()
 	if distance > attack_range:

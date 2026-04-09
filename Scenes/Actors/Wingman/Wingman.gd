@@ -23,10 +23,10 @@ func _draw():
 	var secondary_color = primary_color.darkened(0.5)
 
 	var points = PackedVector2Array([
-		Vector2(80, 0) * draw_scale,
-		Vector2(0, 25) * draw_scale,
-		Vector2(0, -25) * draw_scale,
-		Vector2(80, 0) * draw_scale,
+		Vector2(32, 0) * draw_scale,
+		Vector2(-32, 20) * draw_scale,
+		Vector2(-32, -20) * draw_scale,
+		Vector2(32, 0) * draw_scale,
 	])
 
 	draw_polygon(points, [secondary_color])

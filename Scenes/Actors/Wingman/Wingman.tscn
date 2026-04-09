@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_x66b8"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
-points = PackedVector2Array(80, 0, 0, 20, 0, -20)
+points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 
 [node name="Wingman" type="CharacterBody2D" unique_id=392969111]
 motion_mode = 1
