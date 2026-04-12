@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="4_da52b"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
+[ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_gm1uy"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
 points = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
@@ -22,6 +23,7 @@ points = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
 radius = 32.0
 
 [node name="Minion" type="CharacterBody2D" unique_id=209382350]
+z_index = 2
 motion_mode = 1
 script = ExtResource("1_bb0ru")
 projectile_scene = ExtResource("2_32q8u")
@@ -35,6 +37,10 @@ shape = SubResource("ConvexPolygonShape2D_bb0ru")
 
 [node name="AttackTimer" type="Timer" parent="." unique_id=2063097943]
 one_shot = true
+
+[node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("9_gm1uy")]
+outline_width = 4.0
+hover_area = NodePath("../HurtboxComponent")
 
 [node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("2_8rcmy")]
 target_group = "team_a"
@@ -57,6 +63,7 @@ position = Vector2(19, 0)
 shape = SubResource("CircleShape2D_da52b")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("7_1i7ti")]
+z_index = 10
 size = Vector2(30, 4)
 offset = Vector2(0, -32)
 

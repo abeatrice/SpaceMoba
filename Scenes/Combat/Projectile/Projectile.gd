@@ -20,13 +20,6 @@ func init(initial_position: Vector2, initial_target: Node2D):
 		var targets_team = target.get_node("TeamComponent") as TeamComponent
 		hitbox_component.target_group = targets_team.get_team_group()
 		hitbox_component.collision_mask = targets_team.get_team_hurtbox_layer()
-	#hitbox_component.target_group = 
-	#var hb: HitboxComponent = p.get_node("HitboxComponent")
-	#hb.target_group = team_component.get_enemy_group()
-	#if team_component.team == TeamComponent.Team.A:
-		#hb.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
-	#else:
-		#hb.collision_mask = TeamComponent.LAYER_TEAM_A_HURTBOX
 
 func _draw():
 	draw_circle(Vector2.ZERO, 3, Color(1, 1, 1, alpha))

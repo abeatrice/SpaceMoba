@@ -1,29 +1,49 @@
 [gd_scene format=3 uid="uid://bn41katp000sd"]
 
+[ext_resource type="PackedScene" uid="uid://cspamshfara6x" path="res://Components/CameraComponent/CameraComponent.tscn" id="1_tdvvx"]
+[ext_resource type="Texture2D" uid="uid://c27pt275mdppq" path="res://Scenes/Worlds/BlueNebula/BlueNebula.png" id="2_am8ob"]
 [ext_resource type="PackedScene" uid="uid://2eh2hvslaefp" path="res://Scenes/Actors/Ship/Ship.tscn" id="2_bafyo"]
-[ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="5_88kut"]
 [ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="6_asx8y"]
 
 [node name="Debug" type="Node" unique_id=2004347515]
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=767733412]
-position = Vector2(964, 544)
-limit_left = 0
-limit_top = 0
-limit_right = 18000
-limit_bottom = 6000
-position_smoothing_enabled = true
+[node name="BackgroundTextureRect" type="TextureRect" parent="." unique_id=570439520]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 16080.0
+offset_bottom = 4920.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("2_am8ob")
+stretch_mode = 1
+metadata/_edit_lock_ = true
+
+[node name="CameraComponent" parent="." unique_id=1592227168 node_paths=PackedStringArray("hero") instance=ExtResource("1_tdvvx")]
+position = Vector2(3482, 2102)
+hero = NodePath("../Ship")
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_bafyo")]
-position = Vector2(964, 544)
+position = Vector2(3482, 2102)
 team_from_inspector = 1
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Ship" unique_id=1681555719]
-remote_path = NodePath("../../Camera2D")
-update_rotation = false
-
 [node name="FortB1" parent="." unique_id=1550830602 instance=ExtResource("6_asx8y")]
-position = Vector2(1270, 540)
+position = Vector2(5215, 2035)
 rotation = 3.1415927
-projectile_scene = ExtResource("5_88kut")
+team_from_inspector = 2
+
+[node name="FortB2" parent="." unique_id=256515390 instance=ExtResource("6_asx8y")]
+position = Vector2(3500, 2914)
+rotation = 3.1415927
+team_from_inspector = 2
+
+[node name="FortB3" parent="." unique_id=1076251660 instance=ExtResource("6_asx8y")]
+position = Vector2(1748, 2080)
+rotation = 3.1415927
+team_from_inspector = 2
+
+[node name="FortB4" parent="." unique_id=2052027970 instance=ExtResource("6_asx8y")]
+position = Vector2(3475, 1266)
+rotation = 3.1415927
 team_from_inspector = 2

@@ -31,6 +31,7 @@ shape = SubResource("ConvexPolygonShape2D_7po6y")
 max_health = 500.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("4_4fbtn")]
+z_index = 10
 size = Vector2(64, 6)
 offset = Vector2(0, -64)
 

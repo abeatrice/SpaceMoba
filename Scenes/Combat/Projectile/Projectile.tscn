@@ -7,7 +7,7 @@
 radius = 3.0
 
 [node name="Projectile" type="Node2D" unique_id=711712543]
-z_index = 1000
+z_index = 2
 script = ExtResource("1_c1f7k")
 
 [node name="HitboxComponent" parent="." unique_id=1084907541 instance=ExtResource("2_tax78")]

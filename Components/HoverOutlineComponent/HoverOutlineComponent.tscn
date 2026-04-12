@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://dh0onrankpxy5"]
+
+[ext_resource type="Script" uid="uid://bwd6ctqka8un7" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.gd" id="1_3iuyr"]
+
+[node name="HoverOutlineComponent" type="Node2D" unique_id=563566309]
+z_index = -1
+script = ExtResource("1_3iuyr")

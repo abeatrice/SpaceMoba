@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 enum Action { IDLE, MOVING, ATTACKING }
 
+const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
+
 @export var speed: float = 400.0
 @export var turn_speed: float = PI * 3
 @export var stopping_distance: float = 5.0
@@ -27,6 +29,7 @@ var target_position: Vector2 = Vector2.ZERO
 var has_target_position := false
 var wingman_target_position: Vector2
 var current_action = Action.IDLE
+var marker: ClickMarker = null
 
 func _draw():
 	var draw_scale := 1.0
@@ -67,7 +70,7 @@ func _handle_input():
 		target_position = get_global_mouse_position()
 		
 		var circle = CircleShape2D.new()
-		circle.radius = 20.0
+		circle.radius = 64.0
 
 		var query = PhysicsShapeQueryParameters2D.new()
 		query.shape = circle
@@ -78,12 +81,40 @@ func _handle_input():
 		var space_state = get_world_2d().direct_space_state
 		var results = space_state.intersect_shape(query)
 
+		var is_attack: bool = false
+		var outline: HoverOutlineComponent
 		if results.size() > 0:
-			targeting.current_target = _get_best_target(results, target_position)
+			var new_target = _get_best_target(results, target_position)
+			if targeting.current_target and targeting.current_target != new_target:
+				outline = targeting.current_target.find_child("HoverOutlineComponent") as HoverOutlineComponent
+				if outline:
+					outline.is_targeted = false
+					outline.queue_redraw()
+
+			targeting.current_target = new_target
+			outline = targeting.current_target.find_child("HoverOutlineComponent") as HoverOutlineComponent
+			if outline:
+				outline.is_targeted = true
+				outline.queue_redraw()
+
 			current_action = Action.ATTACKING
+			is_attack = true
 		else:
 			targeting.current_target = null
 			current_action = Action.MOVING
+			is_attack = false
+
+		if Input.is_action_just_pressed("move_attack"):
+			_spawn_click_marker(target_position, is_attack)
+
+func _spawn_click_marker(pos: Vector2, is_attack: bool):
+	if is_instance_valid(marker):
+		marker.queue_free()
+
+	marker = click_marker_scene.instantiate()
+	get_tree().current_scene.add_child(marker)
+	marker.global_position = pos
+	marker.setup(is_attack)
 
 func _physics_process(delta):
 	_handle_input()

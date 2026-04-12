@@ -16,7 +16,7 @@ radius = 128.0
 radius = 128.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qctcw"]
-radius = 256.0
+radius = 384.0
 
 [node name="Base" type="StaticBody2D" unique_id=256515390]
 script = ExtResource("1_c2yas")
@@ -31,8 +31,9 @@ shape = SubResource("CircleShape2D_c2yas")
 max_health = 1000.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("6_1cv3e")]
-size = Vector2(200, 8)
-offset = Vector2(0, -300)
+z_index = 10
+size = Vector2(256, 8)
+offset = Vector2(0, -192)
 
 [node name="TargetingComponent" type="Node2D" parent="." unique_id=1819425974]
 script = ExtResource("5_hnoul")

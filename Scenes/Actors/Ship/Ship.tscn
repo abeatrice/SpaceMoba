@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
+[ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="5_af0h4"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
@@ -17,6 +18,7 @@ points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 [node name="Ship" type="CharacterBody2D" unique_id=392969111]
 motion_mode = 1
 script = ExtResource("1_fapo8")
+attack_range = 256.0
 projectile_scene = ExtResource("2_4kg1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
@@ -28,6 +30,10 @@ debug_color = Color(1, 1, 1, 1)
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_uin23")]
 max_health = 2000.0
 
+[node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("5_af0h4")]
+outline_width = 8.0
+hover_area = NodePath("../HurtboxComponent")
+
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_el4xe")]
 health_component = NodePath("../HealthComponent")
 
@@ -35,6 +41,7 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("ConvexPolygonShape2D_af0h4")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("5_4kg1j")]
+z_index = 10
 size = Vector2(64, 6)
 offset = Vector2(0, -64)
 
