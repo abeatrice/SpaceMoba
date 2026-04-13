@@ -11,6 +11,7 @@ const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
 @export var rotation_stopping_distance: float = 10.0
 @export	var attack_range: float = 128.0
 @export var projectile_scene: PackedScene
+@export var projectile_damage: float = 50.0
 @export var team_from_inspector: TeamComponent.Team = TeamComponent.Team.NONE:
 	set(value):
 		team_from_inspector = value
@@ -68,44 +69,23 @@ func update_team_visuals():
 func _handle_input():
 	if Input.is_action_pressed("move_attack"):
 		target_position = get_global_mouse_position()
-		
-		var circle = CircleShape2D.new()
-		circle.radius = 64.0
 
-		var query = PhysicsShapeQueryParameters2D.new()
-		query.shape = circle
-		query.transform = Transform2D(0, target_position)
-		query.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
-		query.collide_with_areas = true
-		
-		var space_state = get_world_2d().direct_space_state
-		var results = space_state.intersect_shape(query)
+		var target = _get_target_or_null()
+		if target:
+			if targeting.current_target and targeting.current_target != target:
+				targeting.set_targets_outline(false)
 
-		var is_attack: bool = false
-		var outline: HoverOutlineComponent
-		if results.size() > 0:
-			var new_target = _get_best_target(results, target_position)
-			if targeting.current_target and targeting.current_target != new_target:
-				outline = targeting.current_target.find_child("HoverOutlineComponent") as HoverOutlineComponent
-				if outline:
-					outline.is_targeted = false
-					outline.queue_redraw()
-
-			targeting.current_target = new_target
-			outline = targeting.current_target.find_child("HoverOutlineComponent") as HoverOutlineComponent
-			if outline:
-				outline.is_targeted = true
-				outline.queue_redraw()
+			targeting.current_target = target
+			targeting.set_targets_outline(true)
 
 			current_action = Action.ATTACKING
-			is_attack = true
 		else:
+			targeting.set_targets_outline(false)
 			targeting.current_target = null
 			current_action = Action.MOVING
-			is_attack = false
 
 		if Input.is_action_just_pressed("move_attack"):
-			_spawn_click_marker(target_position, is_attack)
+			_spawn_click_marker(target_position, targeting.is_target_valid())
 
 func _spawn_click_marker(pos: Vector2, is_attack: bool):
 	if is_instance_valid(marker):
@@ -131,6 +111,24 @@ func _physics_process(delta):
 		new_wingman_target_position,
 		speed * delta
 	)
+
+func _get_target_or_null():
+	var circle = CircleShape2D.new()
+	circle.radius = 64.0
+
+	var query = PhysicsShapeQueryParameters2D.new()
+	query.shape = circle
+	query.transform = Transform2D(0, target_position)
+	query.collision_mask = TeamComponent.LAYER_TEAM_B_HURTBOX
+	query.collide_with_areas = true
+	
+	var space_state = get_world_2d().direct_space_state
+	var results = space_state.intersect_shape(query)
+
+	if results.size() > 0:
+		return _get_best_target(results, target_position)
+
+	return null
 
 func _get_best_target(results: Array, click_pos: Vector2) -> Node2D:
 	var closest_target = null
@@ -185,7 +183,7 @@ func _handle_movement_logic(delta):
 func _fire_projectile():
 	var p = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(p)
-	p.init(muzzle_marker.global_position, targeting.current_target)
+	p.init(muzzle_marker.global_position, targeting.current_target, projectile_damage)
 
 func _on_died():
 	queue_free()

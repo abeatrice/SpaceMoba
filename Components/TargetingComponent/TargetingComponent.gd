@@ -52,6 +52,13 @@ func is_aligned(threshold: float = 0.9) -> bool:
 	var forward = Vector2.RIGHT.rotated(get_parent().rotation)
 	return forward.dot(get_dir_to_target()) > threshold
 
+func set_targets_outline(is_targeted: bool):
+	if current_target:
+		var outline = current_target.find_child("HoverOutlineComponent") as HoverOutlineComponent
+		if outline:
+			outline.is_targeted = is_targeted
+			outline.queue_redraw()
+
 func _get_dist_to_polygon_edge(points: PackedVector2Array, trans: Transform2D) -> float:
 	var min_dist = INF
 	var global_points = []

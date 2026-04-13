@@ -32,6 +32,7 @@ projectile_scene = ExtResource("2_32q8u")
 shape = SubResource("ConvexPolygonShape2D_bb0ru")
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_a7136")]
+max_health = 250.0
 
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("4_da52b")]
 

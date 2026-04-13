@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 @export var move_speed: float = 150.0
 @export var projectile_scene: PackedScene
+@export var projectile_damage: float = 50.0
 @export var team_from_inspector: TeamComponent.Team = TeamComponent.Team.NONE:
 	set(value):
 		team_from_inspector = value
@@ -126,7 +127,7 @@ func _move_state(delta):
 func _fire_projectile():
 	var p = projectile_scene.instantiate()
 	get_tree().current_scene.add_child(p)
-	p.init(muzzle_marker.global_position, targeting.current_target)
+	p.init(muzzle_marker.global_position, targeting.current_target, projectile_damage)
 
 func _on_died():
 	if path_controller:

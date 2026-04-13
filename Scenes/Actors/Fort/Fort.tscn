@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="6_1uwx4"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
+[ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_ud8fi"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
 points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
@@ -57,3 +58,6 @@ position = Vector2(16, -16)
 position = Vector2(16, 16)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_vct2u")]
+
+[node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("9_ud8fi")]
+hover_area = NodePath("../HurtboxComponent")

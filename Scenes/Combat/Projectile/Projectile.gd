@@ -13,7 +13,8 @@ var alpha: float = 1.0:
 		alpha = value
 		queue_redraw()
 
-func init(initial_position: Vector2, initial_target: Node2D):
+func init(initial_position: Vector2, initial_target: Node2D, _damage: float):
+	hitbox_component.damage = _damage
 	global_position = initial_position
 	target = initial_target
 	if target.has_node("TeamComponent"):
@@ -25,6 +26,7 @@ func _draw():
 	draw_circle(Vector2.ZERO, 3, Color(1, 1, 1, alpha))
 
 func _ready():
+	hitbox_component.damage = damage
 	hitbox_component.hit_confirmed.connect(_on_hit_confirmed)
 
 func _physics_process(delta):

@@ -28,7 +28,7 @@ debug_color = Color(1, 1, 1, 1)
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_cx01u")]
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_uin23")]
-max_health = 2000.0
+max_health = 1000.0
 
 [node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("5_af0h4")]
 outline_width = 8.0

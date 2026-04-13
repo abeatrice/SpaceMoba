@@ -13,6 +13,8 @@ func _ready():
 	area_exited.connect(_on_area_exited)
 
 func _on_area_entered(area: Node2D):
+	if current_target: return
+
 	var potential_target = area.get_parent()
 	var other_team = potential_target.get_node_or_null("TeamComponent")
 	if other_team and get_parent().team_component.is_enemy(other_team.team):
