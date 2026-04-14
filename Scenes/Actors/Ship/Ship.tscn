@@ -15,7 +15,8 @@ points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_af0h4"]
 points = PackedVector2Array(32, 0, -32, 20, -32, -20)
 
-[node name="Ship" type="CharacterBody2D" unique_id=392969111]
+[node name="Ship" type="CharacterBody2D" unique_id=392969111 groups=["player"]]
+z_index = 5
 motion_mode = 1
 script = ExtResource("1_fapo8")
 attack_range = 256.0

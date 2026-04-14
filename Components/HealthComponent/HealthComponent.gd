@@ -8,8 +8,13 @@ signal health_changed(new_health)
 
 @onready var current_health: float = max_health
 
+var is_dying: bool = false
+
 func damage(amount: float):
+	if is_dying: return
+	
 	current_health -= amount
 	health_changed.emit(current_health)
 	if current_health <= 0:
+		is_dying = true
 		died.emit()

@@ -1,6 +1,8 @@
 class_name Ship
 extends CharacterBody2D
 
+signal died(ship_ref)
+
 enum Action { IDLE, MOVING, ATTACKING }
 
 const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
@@ -12,9 +14,9 @@ const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
 @export	var attack_range: float = 128.0
 @export var projectile_scene: PackedScene
 @export var projectile_damage: float = 50.0
-@export var team_from_inspector: TeamComponent.Team = TeamComponent.Team.NONE:
+@export var team: TeamComponent.Team = TeamComponent.Team.NONE:
 	set(value):
-		team_from_inspector = value
+		team = value
 		if is_inside_tree() and team_component:
 			team_component.team = value
 			update_team_visuals()
@@ -49,8 +51,8 @@ func _draw():
 	#draw_circle(to_local(wingman_target_position), 5, Color.RED)
 
 func _ready():
-	if team_from_inspector != TeamComponent.Team.NONE:
-		team_component.team = team_from_inspector
+	if team != TeamComponent.Team.NONE:
+		team_component.team = team
 	update_team_visuals()
 	wingman_target_position = global_position + (Vector2.LEFT * 200 + Vector2.DOWN * 100)
 	
@@ -186,6 +188,7 @@ func _fire_projectile():
 	p.init(muzzle_marker.global_position, targeting.current_target, projectile_damage)
 
 func _on_died():
+	died.emit(self)
 	queue_free()
 
 func _on_health_changed(new_health: float):

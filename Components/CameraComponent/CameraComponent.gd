@@ -1,3 +1,4 @@
+class_name CameraComponent
 extends Camera2D
 
 @export var hero: Node2D
@@ -17,7 +18,9 @@ func _ready():
 	if hero: global_position = hero.global_position
 
 func _physics_process(delta):
-	if not hero: return
+	if not is_instance_valid(hero):
+		is_free_mode = true
+		return
 
 	_handle_inputs(delta)
 	

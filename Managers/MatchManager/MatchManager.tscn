@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://on7wuoa5kad0"]
+
+[ext_resource type="Script" uid="uid://bxkfgnds08t68" path="res://Managers/MatchManager/MatchManager.gd" id="1_lymou"]
+
+[node name="MatchManager" type="Node" unique_id=374103981]
+script = ExtResource("1_lymou")

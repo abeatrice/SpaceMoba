@@ -26,7 +26,7 @@ hero = NodePath("../Ship")
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_bafyo")]
 position = Vector2(3482, 2102)
-team_from_inspector = 1
+team = 1
 
 [node name="FortB1" parent="." unique_id=1550830602 instance=ExtResource("6_asx8y")]
 position = Vector2(5215, 2035)

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bsyqkctnp5uup"]
+
+[ext_resource type="Script" uid="uid://dgacem8bf5djd" path="res://Components/HeroSpawnerComponent/HeroSpawnerComponent.gd" id="1_tnxq5"]
+
+[node name="HeroSpawnerComponent" type="Marker2D" unique_id=982651021]
+script = ExtResource("1_tnxq5")
