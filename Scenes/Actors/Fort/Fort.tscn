@@ -4,7 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_t60gi"]
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_vct2u"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_olgeh"]
+[ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="3_x4m4s"]
+[ext_resource type="Script" uid="uid://qasm08c7l5pb" path="res://Scenes/Actors/Fort/States/IdleState.gd" id="4_3e8gb"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="4_4fbtn"]
+[ext_resource type="Script" uid="uid://b2tg1d3upn3hu" path="res://Scenes/Actors/Fort/States/AttackState.gd" id="5_3e8gb"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="6_1uwx4"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
@@ -25,6 +28,15 @@ projectile_scene = ExtResource("2_vct2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
 shape = SubResource("ConvexPolygonShape2D_7po6y")
+
+[node name="StateMachineComponent" parent="." unique_id=325896713 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_x4m4s")]
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachineComponent" unique_id=665636935]
+script = ExtResource("4_3e8gb")
+
+[node name="AttackState" type="Node" parent="StateMachineComponent" unique_id=1054501306]
+script = ExtResource("5_3e8gb")
 
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_t60gi")]
 

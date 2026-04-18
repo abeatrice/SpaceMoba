@@ -12,26 +12,35 @@ extends Camera2D
 var camera_offset: Vector2 = Vector2.ZERO
 var is_free_mode: bool = false
 var return_timer: float = 0.0
+var manual_position: Vector2
 
 func _ready():
-	if hero: global_position = hero.global_position
+	manual_position = global_position
+	if hero: 
+		global_position = hero.global_position
+		manual_position = hero.global_position
 
 func _physics_process(delta):
 	if not is_instance_valid(hero):
 		is_free_mode = true
+		_move_camera(delta)
 		return
 
 	_handle_inputs(delta)
+	_handle_edge_panning(delta)
 	
 	if is_free_mode:
 		return_timer -= delta
 		if return_timer <= 0:
 			_return_to_hero()
-	else:
-		_handle_edge_panning(delta)
-		camera_offset = camera_offset.limit_length(max_offset)
-		var target_pos = hero.global_position + camera_offset
-		global_position = global_position.lerp(target_pos, follow_speed * delta)
+	
+	_move_camera(delta)
+
+func _move_camera(delta):
+	var anchor = manual_position if is_free_mode else hero.global_position
+	camera_offset = camera_offset.limit_length(max_offset)
+	var target_pos = anchor + camera_offset
+	global_position = global_position.lerp(target_pos, follow_speed * delta)
 
 func _handle_edge_panning(delta):
 	var mouse_pos = get_viewport().get_mouse_position()
@@ -46,10 +55,6 @@ func _handle_edge_panning(delta):
 	camera_offset += move_vec.normalized() * pan_speed * delta
 	
 func _handle_inputs(_delta):
-	if Input.is_action_pressed("middle_click"):
-		is_free_mode = true
-		return_timer = return_delay
-	
 	if Input.is_action_pressed("camera_snap"):
 		_return_to_hero()
 
@@ -59,10 +64,14 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		else:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			
+
 	if event is InputEventMouseMotion and Input.is_action_pressed("middle_click"):
-		global_position += event.relative * drag_sensitivity * (1.0 / zoom.x)
+		is_free_mode = true
+		return_timer = return_delay
+		var position_change = event.relative * drag_sensitivity * (1.0 / zoom.x)
+		manual_position += position_change
 
 func _return_to_hero():
 	is_free_mode = false
 	camera_offset = Vector2.ZERO
+	manual_position = hero.global_position

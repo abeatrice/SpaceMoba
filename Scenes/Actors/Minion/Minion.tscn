@@ -3,9 +3,12 @@
 [ext_resource type="Script" uid="uid://c12a265g60wac" path="res://Scenes/Actors/Minion/Minion.gd" id="1_bb0ru"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="2_8rcmy"]
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_32q8u"]
+[ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="3_8te6x"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_a7136"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_32q8u"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="4_da52b"]
+[ext_resource type="Script" uid="uid://7hoqtcilobu8" path="res://Scenes/Actors/Minion/States/MoveState.gd" id="4_wgy48"]
+[ext_resource type="Script" uid="uid://ccwyf2vpnmqng" path="res://Scenes/Actors/Minion/States/AttackState.gd" id="5_wgy48"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_gm1uy"]
@@ -31,6 +34,15 @@ projectile_scene = ExtResource("2_32q8u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2015195464]
 shape = SubResource("ConvexPolygonShape2D_bb0ru")
+
+[node name="StateMachineComponent" parent="." unique_id=325896713 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_8te6x")]
+initial_state = NodePath("MoveState")
+
+[node name="MoveState" type="Node" parent="StateMachineComponent" unique_id=1750361864]
+script = ExtResource("4_wgy48")
+
+[node name="AttackState" type="Node" parent="StateMachineComponent" unique_id=32472172]
+script = ExtResource("5_wgy48")
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_a7136")]
 max_health = 250.0
