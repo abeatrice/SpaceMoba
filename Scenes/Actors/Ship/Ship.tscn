@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="5_af0h4"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
+[ext_resource type="Texture2D" uid="uid://c01vw2824fhgl" path="res://Scenes/Actors/Ship/Ship.png" id="9_slc2w"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
 points = PackedVector2Array(32, 0, -32, 20, -32, -20)
@@ -53,3 +54,6 @@ one_shot = true
 
 [node name="MuzzleMarker" type="Marker2D" parent="." unique_id=2110633799]
 position = Vector2(41, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=3766368]
+texture = ExtResource("9_slc2w")

@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://on7wuoa5kad0"]
 
 [ext_resource type="Script" uid="uid://bxkfgnds08t68" path="res://Managers/MatchManager/MatchManager.gd" id="1_lymou"]
+[ext_resource type="PackedScene" uid="uid://coglwi5eiev7s" path="res://Scenes/UI/RespawnUI/RespawnUi.tscn" id="2_tya12"]
 
 [node name="MatchManager" type="Node" unique_id=374103981]
 script = ExtResource("1_lymou")
+
+[node name="RespawnUI" parent="." unique_id=1719452905 instance=ExtResource("2_tya12")]

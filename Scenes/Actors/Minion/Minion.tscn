@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_gm1uy"]
+[ext_resource type="Texture2D" uid="uid://cwvq35ubya5bw" path="res://Scenes/Actors/Minion/minion.png" id="10_it55k"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_bb0ru"]
 points = PackedVector2Array(0, -16, 16, 0, 0, 16, -16, 0)
@@ -69,3 +70,6 @@ size = Vector2(30, 4)
 offset = Vector2(0, -32)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_355fq")]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542190111]
+texture = ExtResource("10_it55k")

@@ -5,10 +5,9 @@ extends Camera2D
 @export var follow_speed: float = 15.0
 @export var pan_speed: float = 1200.0
 @export var drag_sensitivity: float = 1.0
-@export var return_delay: float = 20.0
-@export var edge_threshold: float = 30.0
+@export var return_delay: float = 10.0
+@export var edge_threshold: float = 5.0
 @export var max_offset: float = 400.0
-@export var return_speed: float = 2.0
 
 var camera_offset: Vector2 = Vector2.ZERO
 var is_free_mode: bool = false
@@ -62,7 +61,7 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 			
 	if event is InputEventMouseMotion and Input.is_action_pressed("middle_click"):
-		global_position -= event.relative * drag_sensitivity * (1.0 / zoom.x)
+		global_position += event.relative * drag_sensitivity * (1.0 / zoom.x)
 
 func _return_to_hero():
 	is_free_mode = false

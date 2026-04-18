@@ -32,6 +32,7 @@ metadata/_custom_type_script = "uid://cvn7qhk4wsnxx"
 script = ExtResource("1_rl5dv")
 
 [node name="MatchManager" parent="." unique_id=374103981 node_paths=PackedStringArray("hero_spawner", "camera_component") instance=ExtResource("2_wiegf")]
+respawn_time = 5.0
 hero_spawner = NodePath("../HeroSpawnerComponent")
 camera_component = NodePath("../CameraComponent")
 

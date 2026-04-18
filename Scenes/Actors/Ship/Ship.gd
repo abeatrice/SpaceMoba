@@ -34,20 +34,20 @@ var wingman_target_position: Vector2
 var current_action = Action.IDLE
 var marker: ClickMarker = null
 
-func _draw():
-	var draw_scale := 1.0
-	var primary_color = team_component.get_colors()["primary"]
-	var secondary_color = primary_color.darkened(0.5)
-	
-	var points = PackedVector2Array([
-		Vector2(32, 0) * draw_scale,
-		Vector2(-32, 20) * draw_scale,
-		Vector2(-32, -20) * draw_scale,
-		Vector2(32, 0) * draw_scale,
-	])
-
-	draw_polygon(points, [secondary_color])
-	draw_polyline(points, primary_color, 2 * draw_scale, true)
+#func _draw():
+	#var draw_scale := 1.0
+	#var primary_color = team_component.get_colors()["primary"]
+	#var secondary_color = primary_color.darkened(0.5)
+	#
+	#var points = PackedVector2Array([
+		#Vector2(32, 0) * draw_scale,
+		#Vector2(-32, 20) * draw_scale,
+		#Vector2(-32, -20) * draw_scale,
+		#Vector2(32, 0) * draw_scale,
+	#])
+#
+	#draw_polygon(points, [secondary_color])
+	#draw_polyline(points, primary_color, 2 * draw_scale, true)
 	#draw_circle(to_local(wingman_target_position), 5, Color.RED)
 
 func _ready():
