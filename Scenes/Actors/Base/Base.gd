@@ -52,14 +52,6 @@ func _ready():
 	health_bar.team = team_component.team
 	health_bar.update_health(health_component.current_health, health_component.max_health)
 
-func _physics_process(_delta):
-	if targeting.is_target_valid():
-		rotation = lerp_angle(rotation, targeting.get_dir_to_target().angle(), 0.1)
-		
-		if targeting.is_aligned(0.9) and attack_timer.is_stopped():
-			_fire_projectiles()
-			attack_timer.start()
-
 func _ensure_references():
 	if not detector: detector = get_node("EnemiesDetectorComponent")
 

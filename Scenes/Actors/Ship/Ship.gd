@@ -3,8 +3,6 @@ extends CharacterBody2D
 
 signal died(ship_ref)
 
-enum Action { IDLE, MOVING, ATTACKING }
-
 const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
 
 @export var speed: float = 400.0
@@ -27,28 +25,12 @@ const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
 @onready var targeting: TargetingComponent = $TargetingComponent
 @onready var attack_timer: Timer = $AttackTimer
 @onready var muzzle_marker = $MuzzleMarker
+@onready var state_machine = $StateMachineComponent
 
 var target_position: Vector2 = Vector2.ZERO
 var has_target_position := false
 var wingman_target_position: Vector2
-var current_action = Action.IDLE
 var marker: ClickMarker = null
-
-#func _draw():
-	#var draw_scale := 1.0
-	#var primary_color = team_component.get_colors()["primary"]
-	#var secondary_color = primary_color.darkened(0.5)
-	#
-	#var points = PackedVector2Array([
-		#Vector2(32, 0) * draw_scale,
-		#Vector2(-32, 20) * draw_scale,
-		#Vector2(-32, -20) * draw_scale,
-		#Vector2(32, 0) * draw_scale,
-	#])
-#
-	#draw_polygon(points, [secondary_color])
-	#draw_polyline(points, primary_color, 2 * draw_scale, true)
-	#draw_circle(to_local(wingman_target_position), 5, Color.RED)
 
 func _ready():
 	if team != TeamComponent.Team.NONE:
@@ -71,20 +53,14 @@ func update_team_visuals():
 func _handle_input():
 	if Input.is_action_pressed("move_attack"):
 		target_position = get_global_mouse_position()
-
 		var target = _get_target_or_null()
+		
 		if target:
-			if targeting.current_target and targeting.current_target != target:
-				targeting.set_targets_outline(false)
-
 			targeting.current_target = target
-			targeting.set_targets_outline(true)
-
-			current_action = Action.ATTACKING
+			state_machine._on_child_transition("attackstate")
 		else:
-			targeting.set_targets_outline(false)
+			state_machine._on_child_transition("movestate")
 			targeting.current_target = null
-			current_action = Action.MOVING
 
 		if Input.is_action_just_pressed("move_attack"):
 			_spawn_click_marker(target_position, targeting.is_target_valid())
@@ -100,11 +76,6 @@ func _spawn_click_marker(pos: Vector2, is_attack: bool):
 
 func _physics_process(delta):
 	_handle_input()
-	match current_action:
-		Action.ATTACKING:
-			_handle_attack_logic(delta)
-		Action.MOVING:
-			_handle_movement_logic(delta)
 			
 	var offset = (Vector2.LEFT * 200 + Vector2.DOWN * 100).rotated(global_rotation)
 	var new_wingman_target_position = global_position + offset
@@ -144,43 +115,6 @@ func _get_best_target(results: Array, click_pos: Vector2) -> Node2D:
 			closest_target = target
 	
 	return closest_target
-
-func _handle_attack_logic(delta):
-	if not targeting.is_target_valid():
-		current_action = Action.IDLE
-		return
-
-	var distance = targeting.get_dist_to_target_edge()
-
-	var direction = targeting.get_dir_to_target()
-	if distance > attack_range:
-		var target_velocity = direction * speed
-		velocity = velocity.lerp(target_velocity, 10.0 * delta)
-		if distance > rotation_stopping_distance:
-			rotation = rotate_toward(rotation, direction.angle(), turn_speed * delta)
-		move_and_slide()
-	else:
-		velocity = Vector2.ZERO
-		rotation = rotate_toward(rotation, direction.angle(), turn_speed * delta)
-		if targeting.is_aligned(0.9) and attack_timer.is_stopped():
-			_fire_projectile()
-			attack_timer.start()
-
-func _handle_movement_logic(delta):
-	var distance = global_position.distance_to(target_position)
-	var direction = global_position.direction_to(target_position)
-	
-	if distance > stopping_distance:
-		var target_velocity = direction * speed
-		velocity = velocity.lerp(target_velocity, 10.0 * delta)
-	else:
-		velocity = Vector2.ZERO
-		current_action = Action.IDLE
-	
-	if distance > rotation_stopping_distance:
-		rotation = rotate_toward(rotation, direction.angle(), turn_speed * delta)
-
-	move_and_slide()
 
 func _fire_projectile():
 	var p = projectile_scene.instantiate()

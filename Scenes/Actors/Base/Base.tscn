@@ -4,9 +4,12 @@
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_63s53"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_vk0q6"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_d0mm7"]
+[ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="3_hpqw8"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="3_jwene"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="3_qctcw"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_1cv3e"]
+[ext_resource type="Script" uid="uid://cgvuqsaomm21d" path="res://Scenes/Actors/Base/States/IdleState.gd" id="4_ga8sc"]
+[ext_resource type="Script" uid="uid://dk7d1illvedej" path="res://Scenes/Actors/Base/States/AttackState.gd" id="5_ga8sc"]
 [ext_resource type="Script" uid="uid://c20s28wgd4jro" path="res://Components/TargetingComponent/TargetingComponent.gd" id="5_hnoul"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="6_1cv3e"]
 
@@ -25,6 +28,15 @@ projectile_scene = ExtResource("2_63s53")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
 shape = SubResource("CircleShape2D_c2yas")
+
+[node name="StateMachineComponent" parent="." unique_id=325896713 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_hpqw8")]
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachineComponent" unique_id=287855491]
+script = ExtResource("4_ga8sc")
+
+[node name="AttackState" type="Node" parent="StateMachineComponent" unique_id=1909565787]
+script = ExtResource("5_ga8sc")
 
 [node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("3_jwene")]
 outline_width = 10.0

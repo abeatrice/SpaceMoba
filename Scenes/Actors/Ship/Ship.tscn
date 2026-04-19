@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://c8d2ys23xv0o1" path="res://Scenes/Actors/Ship/Ship.gd" id="1_fapo8"]
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_cx01u"]
+[ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="3_rh8w0"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
+[ext_resource type="Script" uid="uid://b3yy0r8syes7n" path="res://Scenes/Actors/Ship/States/IdleState.gd" id="4_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
+[ext_resource type="Script" uid="uid://cooljovrociia" path="res://Scenes/Actors/Ship/States/MoveState.gd" id="5_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="5_af0h4"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
+[ext_resource type="Script" uid="uid://bh50bow6w5dyb" path="res://Scenes/Actors/Ship/States/AttackState.gd" id="6_tvw8l"]
 [ext_resource type="Texture2D" uid="uid://c01vw2824fhgl" path="res://Scenes/Actors/Ship/Ship.png" id="9_slc2w"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
@@ -26,6 +30,17 @@ projectile_scene = ExtResource("2_4kg1j")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
 shape = SubResource("ConvexPolygonShape2D_fapo8")
 debug_color = Color(1, 1, 1, 1)
+
+[node name="StateMachineComponent" parent="." unique_id=325896713 instance=ExtResource("3_rh8w0")]
+
+[node name="IdleState" type="Node" parent="StateMachineComponent" unique_id=1590499213]
+script = ExtResource("4_2xhk3")
+
+[node name="MoveState" type="Node" parent="StateMachineComponent" unique_id=1029964365]
+script = ExtResource("5_2xhk3")
+
+[node name="AttackState" type="Node" parent="StateMachineComponent" unique_id=1716043795]
+script = ExtResource("6_tvw8l")
 
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_cx01u")]
 
