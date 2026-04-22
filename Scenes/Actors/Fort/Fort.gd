@@ -19,23 +19,6 @@ extends StaticBody2D
 
 var detector: DetectorComponent
 
-func _draw():
-	var draw_scale := 1.0
-	var primary_color = team_component.get_colors()["primary"]
-	var secondary_color = primary_color.darkened(0.5)
-
-	var points = PackedVector2Array([
-		Vector2(32, 0) * draw_scale,
-		Vector2(0, -32) * draw_scale,
-		Vector2(-32, 0) * draw_scale,
-		Vector2(0, 32) * draw_scale,
-		Vector2(32, 0) * draw_scale,
-	])
-
-	draw_polygon(points, [secondary_color])
-	draw_polyline(points, primary_color, 2 * draw_scale, true)
-	draw_line(Vector2.ZERO, Vector2(32, 0) * draw_scale, primary_color, 2 * draw_scale, true)
-
 func _ready():
 	if team_from_inspector != TeamComponent.Team.NONE:
 		team_component.team = team_from_inspector

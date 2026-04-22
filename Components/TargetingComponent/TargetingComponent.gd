@@ -59,6 +59,11 @@ func set_targets_outline(is_targeted: bool):
 			outline.is_targeted = is_targeted
 			outline.queue_redraw()
 
+		var sprite_outline = current_target.find_child("SpriteOutlineComponent") as SpriteOutlineComponent
+		if sprite_outline:
+			sprite_outline.is_targeted = is_targeted
+			sprite_outline.update_shader()
+
 func _get_dist_to_polygon_edge(points: PackedVector2Array, trans: Transform2D) -> float:
 	var min_dist = INF
 	var global_points = []

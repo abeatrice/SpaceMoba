@@ -25,7 +25,6 @@ func _draw():
 		if points.size() > 2:
 			points.append(points[0])
 			var draw_points = PackedVector2Array(points)
-			#draw_polyline(draw_points, color * 0.5, outline_width * 0.2, true) # soft outer line
 			draw_polyline(draw_points, color, outline_width, true)
 
 func _ready():

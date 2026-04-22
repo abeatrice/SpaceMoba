@@ -57,9 +57,9 @@ func _handle_input():
 		
 		if target:
 			targeting.current_target = target
-			state_machine._on_child_transition("attackstate")
+			state_machine.transition("attackstate")
 		else:
-			state_machine._on_child_transition("movestate")
+			state_machine.transition("movestate")
 			targeting.current_target = null
 
 		if Input.is_action_just_pressed("move_attack"):

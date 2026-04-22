@@ -1,6 +1,9 @@
 [gd_scene format=3 uid="uid://cspamshfara6x"]
 
 [ext_resource type="Script" uid="uid://b4w82rnpxotlw" path="res://Components/CameraComponent/CameraComponent.gd" id="1_fvboe"]
+[ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="2_vy603"]
+[ext_resource type="Script" uid="uid://hxphptk14ppi" path="res://Components/CameraComponent/States/LockedState.gd" id="3_6o78b"]
+[ext_resource type="Script" uid="uid://dh2eei54licb5" path="res://Components/CameraComponent/States/UnlockedState.gd" id="4_eqqar"]
 
 [node name="CameraComponent" type="Camera2D" unique_id=1592227168]
 limit_left = 0
@@ -8,3 +11,12 @@ limit_top = 0
 limit_right = 18000
 limit_bottom = 6000
 script = ExtResource("1_fvboe")
+
+[node name="StateMachineComponent" parent="." unique_id=325896713 node_paths=PackedStringArray("initial_state") instance=ExtResource("2_vy603")]
+initial_state = NodePath("LockedState")
+
+[node name="LockedState" type="Node" parent="StateMachineComponent" unique_id=664017165]
+script = ExtResource("3_6o78b")
+
+[node name="UnlockedState" type="Node" parent="StateMachineComponent" unique_id=1424714758]
+script = ExtResource("4_eqqar")

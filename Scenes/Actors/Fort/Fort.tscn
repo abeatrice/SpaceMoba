@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
 [ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_ud8fi"]
+[ext_resource type="Texture2D" uid="uid://bfwggwoh4qw54" path="res://Scenes/Actors/Fort/Fort64x64.png" id="13_h3hpq"]
 
 [sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
 points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
@@ -45,8 +46,8 @@ max_health = 500.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("4_4fbtn")]
 z_index = 10
-size = Vector2(64, 6)
-offset = Vector2(0, -64)
+size = Vector2(48, 5)
+offset = Vector2(0, -48)
 
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("6_1uwx4")]
 health_component = NodePath("../HealthComponent")
@@ -73,3 +74,6 @@ position = Vector2(16, 16)
 
 [node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("9_ud8fi")]
 hover_area = NodePath("../HurtboxComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1124928036]
+texture = ExtResource("13_h3hpq")
