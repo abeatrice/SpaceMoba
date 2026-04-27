@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cvn7qhk4wsnxx" path="res://Resources/WaveData/WaveData.gd" id="7_akqbd"]
 [ext_resource type="PackedScene" uid="uid://g16hs65a1q32" path="res://Components/SpawnerComponent/SpawnerComponent.tscn" id="7_jpt7o"]
 [ext_resource type="PackedScene" uid="uid://bsyqkctnp5uup" path="res://Components/HeroSpawnerComponent/HeroSpawnerComponent.tscn" id="7_yxasx"]
+[ext_resource type="PackedScene" uid="uid://d0qk4j753shk" path="res://Controllers/PlayerController/PlayerController.tscn" id="10_5jd51"]
 [ext_resource type="PackedScene" uid="uid://ckwoitj26np6x" path="res://Scenes/Actors/Base/Base.tscn" id="10_wiegf"]
 [ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="10_yxasx"]
 
@@ -69,9 +70,13 @@ reverse_direction = true
 [node name="CameraComponent" parent="." unique_id=1592227168 node_paths=PackedStringArray("hero") instance=ExtResource("6_akqbd")]
 hero = NodePath("../Ship")
 
-[node name="HeroSpawnerComponent" parent="." unique_id=982651021 instance=ExtResource("7_yxasx")]
+[node name="HeroSpawnerComponent" parent="." unique_id=982651021 node_paths=PackedStringArray("player_controller") instance=ExtResource("7_yxasx")]
 position = Vector2(9000, 3000)
 hero_scene = ExtResource("2_4r1pt")
+player_controller = NodePath("../PlayerController")
+
+[node name="PlayerController" parent="." unique_id=1398685983 node_paths=PackedStringArray("hero") instance=ExtResource("10_5jd51")]
+hero = NodePath("../Ship")
 
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_4r1pt")]
 position = Vector2(9000, 3000)

@@ -11,14 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="6_1uwx4"]
 [ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="7_speva"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_vct2u"]
-[ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="9_ud8fi"]
-[ext_resource type="Texture2D" uid="uid://bfwggwoh4qw54" path="res://Scenes/Actors/Fort/Fort64x64.png" id="13_h3hpq"]
+[ext_resource type="PackedScene" uid="uid://daymix30s8e8h" path="res://Components/SpriteOutlineComponent/SpriteOutlineComponent.tscn" id="12_h3hpq"]
+[ext_resource type="Texture2D" uid="uid://b8ssj642v0myh" path="res://Scenes/Actors/Fort/Fort128x128.png" id="13_h3hpq"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_7po6y"]
-points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1sck"]
+size = Vector2(123, 63)
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_vct2u"]
-points = PackedVector2Array(32, 0, 0, -32, -32, 0, 0, 32)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_36ddm"]
+size = Vector2(124, 64)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_7po6y"]
 radius = 256.0
@@ -28,7 +28,7 @@ script = ExtResource("1_amo8l")
 projectile_scene = ExtResource("2_vct2u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1912605320]
-shape = SubResource("ConvexPolygonShape2D_7po6y")
+shape = SubResource("RectangleShape2D_x1sck")
 
 [node name="StateMachineComponent" parent="." unique_id=325896713 node_paths=PackedStringArray("initial_state") instance=ExtResource("3_x4m4s")]
 initial_state = NodePath("IdleState")
@@ -53,7 +53,7 @@ offset = Vector2(0, -48)
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=571055425]
-shape = SubResource("ConvexPolygonShape2D_vct2u")
+shape = SubResource("RectangleShape2D_36ddm")
 
 [node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("7_speva")]
 target_group = "team_a"
@@ -72,8 +72,9 @@ position = Vector2(16, 16)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_vct2u")]
 
-[node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("9_ud8fi")]
+[node name="SpriteOutlineComponent" parent="." unique_id=1978378427 node_paths=PackedStringArray("hover_area", "sprite") instance=ExtResource("12_h3hpq")]
 hover_area = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1124928036]
 texture = ExtResource("13_h3hpq")

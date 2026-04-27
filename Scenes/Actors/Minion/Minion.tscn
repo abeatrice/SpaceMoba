@@ -12,19 +12,19 @@
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="7_1i7ti"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="8_355fq"]
 [ext_resource type="PackedScene" uid="uid://daymix30s8e8h" path="res://Components/SpriteOutlineComponent/SpriteOutlineComponent.tscn" id="9_ry25o"]
-[ext_resource type="Texture2D" uid="uid://cwvq35ubya5bw" path="res://Scenes/Actors/Minion/minion.png" id="10_it55k"]
+[ext_resource type="Texture2D" uid="uid://bipnhs3mqtdcv" path="res://Scenes/Actors/Minion/Minion64x64.png" id="13_wgy48"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v2c1s"]
-radius = 18.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8rcmy"]
 radius = 256.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qpsed"]
-radius = 18.0
+radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_da52b"]
-radius = 32.0
+radius = 48.0
 
 [node name="Minion" type="CharacterBody2D" unique_id=209382350]
 z_index = 2
@@ -84,4 +84,4 @@ offset = Vector2(0, -32)
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("8_355fq")]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1542190111]
-texture = ExtResource("10_it55k")
+texture = ExtResource("13_wgy48")

@@ -1,6 +1,6 @@
 extends CameraState
 
-func enter() -> void:
+func enter(_msg := {}) -> void:
 	camera.camera_offset = Vector2.ZERO
 
 func physics_process(delta: float) -> void:

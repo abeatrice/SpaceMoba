@@ -1,17 +1,16 @@
 extends ShipState
 
-func physics_process(delta: float) -> void:
-	var distance = ship.global_position.distance_to(ship.target_position)
-	var direction = ship.global_position.direction_to(ship.target_position)
-	
-	if distance > ship.stopping_distance:
-		var target_velocity = direction * ship.speed
-		ship.velocity = ship.velocity.lerp(target_velocity, 10.0 * delta)
-	else:
-		ship.velocity = Vector2.ZERO
-		transitioned.emit("idlestate")
-	
-	if distance > ship.rotation_stopping_distance:
-		ship.rotation = rotate_toward(ship.rotation, direction.angle(), ship.turn_speed * delta)
+func enter(_msg := {}) -> void:
+	if not ship.movement.destination_reached.is_connected(_on_arrived):
+		ship.movement.destination_reached.connect(_on_arrived, CONNECT_ONE_SHOT)
 
-	ship.move_and_slide()
+func physics_process(_delta: float) -> void:
+	if not ship.movement.is_moving:
+		ship.state.transition("idlestate")
+
+func _on_arrived():
+	ship.state.transition("idlestate")
+
+func exit():
+	if ship.movement.destination_reached.is_connected(_on_arrived):
+		ship.movement.destination_reached.disconnect(_on_arrived)

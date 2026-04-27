@@ -19,7 +19,7 @@ func _ready():
 	if initial_state:
 		current_state = initial_state
 		current_state.enter()
-			
+
 func _process(delta: float) -> void:
 	if current_state:
 		current_state.process(delta)
@@ -28,11 +28,11 @@ func _physics_process(delta: float) -> void:
 	if current_state:
 		current_state.physics_process(delta)
 
-func transition(new_state_name: String) ->  void:
+func transition(new_state_name: String, msg: Dictionary = {}) ->  void:
 	var new_state = states.get(new_state_name.to_lower())
 	if !new_state or new_state == current_state: return
 	
 	if current_state: current_state.exit()
 	
 	current_state = new_state
-	current_state.enter()
+	current_state.enter(msg)

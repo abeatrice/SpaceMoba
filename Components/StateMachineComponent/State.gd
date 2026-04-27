@@ -7,7 +7,7 @@ signal transitioned(state_name: String)
 var actor: Node2D
 
 func setup() -> void: pass
-func enter() -> void: pass
+func enter(_msg := {}) -> void: pass
 func exit() -> void: pass
 func process(_delta: float) -> void: pass
 func physics_process(_delta: float) -> void: pass

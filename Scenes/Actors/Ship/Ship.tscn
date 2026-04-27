@@ -3,22 +3,24 @@
 [ext_resource type="Script" uid="uid://c8d2ys23xv0o1" path="res://Scenes/Actors/Ship/Ship.gd" id="1_fapo8"]
 [ext_resource type="PackedScene" uid="uid://ddesng5rk5utn" path="res://Scenes/Combat/Projectile/Projectile.tscn" id="2_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dj5p8bj0b6kgp" path="res://Components/TeamComponent/TeamComponent.tscn" id="2_cx01u"]
+[ext_resource type="PackedScene" uid="uid://cg8joxa68qjak" path="res://Components/MovementComponent/MovementComponent.tscn" id="3_ovmfj"]
 [ext_resource type="PackedScene" uid="uid://61co7kqfd87x" path="res://Components/StateMachineComponent/StateMachineComponent.tscn" id="3_rh8w0"]
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
 [ext_resource type="Script" uid="uid://b3yy0r8syes7n" path="res://Scenes/Actors/Ship/States/IdleState.gd" id="4_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
 [ext_resource type="Script" uid="uid://cooljovrociia" path="res://Scenes/Actors/Ship/States/MoveState.gd" id="5_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
-[ext_resource type="PackedScene" uid="uid://dh0onrankpxy5" path="res://Components/HoverOutlineComponent/HoverOutlineComponent.tscn" id="5_af0h4"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
 [ext_resource type="Script" uid="uid://bh50bow6w5dyb" path="res://Scenes/Actors/Ship/States/AttackState.gd" id="6_tvw8l"]
-[ext_resource type="Texture2D" uid="uid://c01vw2824fhgl" path="res://Scenes/Actors/Ship/Ship.png" id="9_slc2w"]
+[ext_resource type="Script" uid="uid://i1i51cs33s87" path="res://Scenes/Actors/Ship/States/CastState.gd" id="8_wab6d"]
+[ext_resource type="PackedScene" uid="uid://daymix30s8e8h" path="res://Components/SpriteOutlineComponent/SpriteOutlineComponent.tscn" id="9_tvw8l"]
+[ext_resource type="Texture2D" uid="uid://bco8g7fubud8a" path="res://Scenes/Actors/Ship/Ship128x128.png" id="13_tvw8l"]
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_fapo8"]
-points = PackedVector2Array(32, 0, -32, 20, -32, -20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_ovmfj"]
+radius = 66.0
 
-[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_af0h4"]
-points = PackedVector2Array(32, 0, -32, 20, -32, -20)
+[sub_resource type="CircleShape2D" id="CircleShape2D_wab6d"]
+radius = 42.0
 
 [node name="Ship" type="CharacterBody2D" unique_id=392969111 groups=["player"]]
 z_index = 5
@@ -28,8 +30,10 @@ attack_range = 256.0
 projectile_scene = ExtResource("2_4kg1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
-shape = SubResource("ConvexPolygonShape2D_fapo8")
-debug_color = Color(1, 1, 1, 1)
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_ovmfj")
+
+[node name="MovementComponent" parent="." unique_id=25271499 instance=ExtResource("3_ovmfj")]
 
 [node name="StateMachineComponent" parent="." unique_id=325896713 instance=ExtResource("3_rh8w0")]
 
@@ -42,25 +46,28 @@ script = ExtResource("5_2xhk3")
 [node name="AttackState" type="Node" parent="StateMachineComponent" unique_id=1716043795]
 script = ExtResource("6_tvw8l")
 
+[node name="CastState" type="Node" parent="StateMachineComponent" unique_id=1528720490]
+script = ExtResource("8_wab6d")
+
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_cx01u")]
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_uin23")]
 max_health = 1000.0
 
-[node name="HoverOutlineComponent" parent="." unique_id=563566309 node_paths=PackedStringArray("hover_area") instance=ExtResource("5_af0h4")]
-outline_width = 8.0
+[node name="SpriteOutlineComponent" parent="." unique_id=1978378427 node_paths=PackedStringArray("hover_area", "sprite") instance=ExtResource("9_tvw8l")]
 hover_area = NodePath("../HurtboxComponent")
+sprite = NodePath("../Sprite2D")
 
 [node name="HurtboxComponent" parent="." unique_id=807394523 node_paths=PackedStringArray("health_component") instance=ExtResource("4_el4xe")]
 health_component = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" unique_id=1629476361]
-shape = SubResource("ConvexPolygonShape2D_af0h4")
+shape = SubResource("CircleShape2D_wab6d")
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("5_4kg1j")]
 z_index = 10
-size = Vector2(64, 4)
-offset = Vector2(0, -48)
+size = Vector2(64, 6)
+offset = Vector2(0, -72)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("6_el4xe")]
 
@@ -71,4 +78,4 @@ one_shot = true
 position = Vector2(41, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=3766368]
-texture = ExtResource("9_slc2w")
+texture = ExtResource("13_tvw8l")

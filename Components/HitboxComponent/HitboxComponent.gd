@@ -13,7 +13,8 @@ func _init():
 func _on_area_entered(area: Area2D):
 	if not area is HurtboxComponent: return
 	var victim = area.get_parent()
-	if victim != get_parent().target: return
+	var target = get_parent().get("target")
+	if target && victim != target: return
 	if target_group == "" or victim.is_in_group(target_group):
 		area.receive_hit(damage)
 		hit_confirmed.emit()
