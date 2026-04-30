@@ -13,16 +13,23 @@ func enter(msg := {}) -> void:
 		_start_cast_timer()
 
 func _start_cast_timer():
+	ship.is_busy = true
 	var cast_time = ability_data.get("cast_time", 0.0)
 	get_tree().create_timer(cast_time).timeout.connect(_execute_ability)
 	
 func _execute_ability():
 	if ship.state.current_state != self: return
-	
+	ship.is_busy = false
+
 	var slot = ability_data.get("slot", "")
 	var target_pos = ability_data.get("target_pos", Vector2.ZERO)
 
 	if slot == "q":
 		ship._fire_plasma_bolt(target_pos)
+		
+	ship.cooldowns.start(slot)
 	
 	transitioned.emit("idlestate")
+
+func exit() -> void:
+	ship.is_busy = false

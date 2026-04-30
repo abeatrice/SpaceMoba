@@ -4,23 +4,28 @@ extends Node2D
 @export var hero: CharacterBody2D
 
 var is_dragging: bool = false
+var current_selected_target: Node2D = null
 
 func _input(event):
 	if not is_instance_valid(hero): return
+	
+	if hero.is_busy: return
 
 	if event.is_action_pressed("move_attack"):
 		var click_pos = get_global_mouse_position()
 		var target = _query_target_at_pos(click_pos)
-		
+
 		if target:
 			is_dragging = false
+			_set_new_selection(target)
 			hero.targeting.current_target = target
 			hero.state.transition("attackstate")
-			hero._spawn_click_marker(click_pos, true)
+			hero.spawn_click_marker(click_pos, true)
 		else:
 			is_dragging = true
+			_clear_selection()
 			_move_to_mouse()
-			hero._spawn_click_marker(click_pos, false)
+			hero.spawn_click_marker(click_pos, false)
 	elif event.is_action_released("move_attack"):
 		is_dragging = false
 	elif event.is_action_pressed("ability_q"):
@@ -31,7 +36,7 @@ func _input(event):
 		_execute_quick_cast("e")
 	elif event.is_action_pressed("ability_r"):
 		_execute_quick_cast("r")
-	elif event.is_action_pressed("ability_r"):
+	elif event.is_action_pressed("ability_d"):
 		_execute_quick_cast("d")
 	elif event.is_action_pressed("ability_1"):
 		_execute_quick_cast("1")
@@ -45,6 +50,28 @@ func _input(event):
 func _process(_delta):
 	if is_dragging and is_instance_valid(hero):
 		_move_to_mouse()
+
+func _set_new_selection(new_target: Node2D):
+	_clear_selection()
+	
+	current_selected_target = new_target
+	_toggle_outline(current_selected_target, true)
+	
+func _clear_selection():
+	if is_instance_valid(current_selected_target):
+		_toggle_outline(current_selected_target, false)
+	current_selected_target = null
+
+func _toggle_outline(target: Node2D, val: bool):
+	var outline = target.find_child("HoverOutlineComponent") as HoverOutlineComponent
+	if outline:
+		outline.is_targeted = val
+		outline.queue_redraw()
+
+	var sprite_outline = target.find_child("SpriteOutlineComponent") as SpriteOutlineComponent
+	if sprite_outline:
+		sprite_outline.is_targeted = val
+		sprite_outline.update_shader()
 
 func _move_to_mouse():
 	var mouse_pos = get_global_mouse_position()
@@ -79,6 +106,8 @@ func _query_target_at_pos(pos: Vector2) -> Node2D:
 	return null
 
 func _execute_quick_cast(slot: String):
+	if not hero.cooldowns.is_ready(slot): return
+
 	var mouse_pos = get_global_mouse_position()
 	var target = _query_target_at_pos(mouse_pos)
 	

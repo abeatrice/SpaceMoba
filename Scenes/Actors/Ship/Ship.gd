@@ -25,15 +25,19 @@ const plasma_bolt_scene: PackedScene = preload("uid://b3vdi8tcjc6ip")
 @onready var muzzle_marker = $MuzzleMarker
 @onready var state: StatemachineComponent = $StateMachineComponent
 @onready var movement: MovementComponent = $MovementComponent
+@onready var cooldowns: CooldownComponent = $CooldownComponent
 
 var wingman_target_position: Vector2
 var marker: ClickMarker = null
+var is_busy: bool = false
 
 func _ready():
 	if team != TeamComponent.Team.NONE:
 		team_component.team = team
 	update_team_visuals()
 	wingman_target_position = global_position + (Vector2.LEFT * 200 + Vector2.DOWN * 100)
+	
+	cooldowns.setup_ability("q", 4.0)
 	
 	health_component.died.connect(_on_died)
 	health_component.health_changed.connect(_on_health_changed)
@@ -75,7 +79,7 @@ func use_ability(slot: String, target_pos: Vector2, target_node: Node2D):
 		"q":
 			print(slot, target_pos, target_node)
 
-func _spawn_click_marker(pos: Vector2, is_attack: bool):
+func spawn_click_marker(pos: Vector2, is_attack: bool):
 	if is_instance_valid(marker):
 		marker.queue_free()
 

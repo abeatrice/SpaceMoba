@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://brhklev03e28u" path="res://Components/HealthComponent/HealthComponent.tscn" id="3_uin23"]
 [ext_resource type="Script" uid="uid://b3yy0r8syes7n" path="res://Scenes/Actors/Ship/States/IdleState.gd" id="4_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://cxpdup6poi4vt" path="res://Components/HurtboxComponent/HurtboxComponent.tscn" id="4_el4xe"]
+[ext_resource type="PackedScene" uid="uid://6qidxbii67pf" path="res://Components/CooldownComponent/CooldownComponent.tscn" id="4_sroii"]
 [ext_resource type="Script" uid="uid://cooljovrociia" path="res://Scenes/Actors/Ship/States/MoveState.gd" id="5_2xhk3"]
 [ext_resource type="PackedScene" uid="uid://bqlr826iv8hnu" path="res://Components/HealthBarComponent/HealthBarComponent.tscn" id="5_4kg1j"]
 [ext_resource type="PackedScene" uid="uid://dapnnualg5kud" path="res://Components/TargetingComponent/TargetingComponent.tscn" id="6_el4xe"]
@@ -34,6 +35,8 @@ position = Vector2(-6, 0)
 shape = SubResource("CircleShape2D_ovmfj")
 
 [node name="MovementComponent" parent="." unique_id=25271499 instance=ExtResource("3_ovmfj")]
+
+[node name="CooldownComponent" parent="." unique_id=1069102972 instance=ExtResource("4_sroii")]
 
 [node name="StateMachineComponent" parent="." unique_id=325896713 instance=ExtResource("3_rh8w0")]
 

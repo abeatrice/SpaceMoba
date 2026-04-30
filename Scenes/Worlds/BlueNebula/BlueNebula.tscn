@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://c7o8e02r25e5l"]
 
 [ext_resource type="Texture2D" uid="uid://c27pt275mdppq" path="res://Scenes/Worlds/BlueNebula/BlueNebula.png" id="1_bilp4"]
-[ext_resource type="Script" uid="uid://diu0procyfq00" path="res://Scenes/Worlds/BlueNebula/BlueNebula.gd" id="1_rl5dv"]
 [ext_resource type="PackedScene" uid="uid://2eh2hvslaefp" path="res://Scenes/Actors/Ship/Ship.tscn" id="2_4r1pt"]
 [ext_resource type="PackedScene" uid="uid://on7wuoa5kad0" path="res://Managers/MatchManager/MatchManager.tscn" id="2_wiegf"]
 [ext_resource type="PackedScene" uid="uid://cspamshfara6x" path="res://Components/CameraComponent/CameraComponent.tscn" id="6_akqbd"]
@@ -30,7 +29,6 @@ minion_scene = ExtResource("6_oyvgg")
 metadata/_custom_type_script = "uid://cvn7qhk4wsnxx"
 
 [node name="BlueNebula" type="Node" unique_id=2004347515]
-script = ExtResource("1_rl5dv")
 
 [node name="MatchManager" parent="." unique_id=374103981 node_paths=PackedStringArray("hero_spawner", "camera_component") instance=ExtResource("2_wiegf")]
 respawn_time = 5.0
@@ -70,10 +68,11 @@ reverse_direction = true
 [node name="CameraComponent" parent="." unique_id=1592227168 node_paths=PackedStringArray("hero") instance=ExtResource("6_akqbd")]
 hero = NodePath("../Ship")
 
-[node name="HeroSpawnerComponent" parent="." unique_id=982651021 node_paths=PackedStringArray("player_controller") instance=ExtResource("7_yxasx")]
+[node name="HeroSpawnerComponent" parent="." unique_id=982651021 node_paths=PackedStringArray("player_controller", "camera") instance=ExtResource("7_yxasx")]
 position = Vector2(9000, 3000)
 hero_scene = ExtResource("2_4r1pt")
 player_controller = NodePath("../PlayerController")
+camera = NodePath("../CameraComponent")
 
 [node name="PlayerController" parent="." unique_id=1398685983 node_paths=PackedStringArray("hero") instance=ExtResource("10_5jd51")]
 hero = NodePath("../Ship")

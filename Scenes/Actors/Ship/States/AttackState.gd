@@ -1,8 +1,7 @@
 extends ShipState
 
 func enter(_msg := {}) -> void:
-	if ship.targeting.current_target:
-		ship.targeting.set_targets_outline(true)
+	pass
 
 func physics_process(delta: float) -> void:
 	if not ship.targeting.is_target_valid():
@@ -28,5 +27,3 @@ func physics_process(delta: float) -> void:
 
 func exit() -> void:
 	ship.movement.stop()
-	if is_instance_valid(ship.targeting.current_target):
-		ship.targeting.set_targets_outline(false)

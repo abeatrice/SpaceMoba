@@ -8,7 +8,7 @@ extends Camera2D
 @export var edge_threshold: float = 5.0
 @export var max_offset: float = 400.0
 
-@onready var state_machine = $StateMachineComponent
+@onready var state = $StateMachineComponent
 
 var camera_offset: Vector2 = Vector2.ZERO
 
@@ -36,6 +36,6 @@ func _input(event):
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 	if event is InputEventMouseMotion and Input.is_action_pressed("middle_click"):
-		state_machine.transition("unlockedstate")
+		state.transition("unlockedstate")
 		var position_change = event.relative * drag_sensitivity * (1.0 / zoom.x)
 		global_position += position_change

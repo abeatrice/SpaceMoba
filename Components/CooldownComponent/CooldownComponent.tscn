@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://6qidxbii67pf"]
+
+[ext_resource type="Script" uid="uid://c2v77yr5mmb2s" path="res://Components/CooldownComponent/CooldownComponent.gd" id="1_gbyr7"]
+
+[node name="CooldownComponent" type="Node" unique_id=1069102972]
+script = ExtResource("1_gbyr7")
