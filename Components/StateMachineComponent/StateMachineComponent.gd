@@ -36,3 +36,8 @@ func transition(new_state_name: String, msg: Dictionary = {}) ->  void:
 	
 	current_state = new_state
 	current_state.enter(msg)
+
+func get_current_state_name() -> String:
+	if current_state:
+		return current_state.name.to_lower()
+	return ""

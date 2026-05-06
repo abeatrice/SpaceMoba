@@ -11,6 +11,8 @@
 [ext_resource type="PackedScene" uid="uid://d0qk4j753shk" path="res://Controllers/PlayerController/PlayerController.tscn" id="10_5jd51"]
 [ext_resource type="PackedScene" uid="uid://ckwoitj26np6x" path="res://Scenes/Actors/Base/Base.tscn" id="10_wiegf"]
 [ext_resource type="PackedScene" uid="uid://m7vijpvh6e6l" path="res://Scenes/Actors/Fort/Fort.tscn" id="10_yxasx"]
+[ext_resource type="PackedScene" uid="uid://cqyqkq5v8k8jv" path="res://Controllers/ShipController/ShipController.tscn" id="11_2wtd1"]
+[ext_resource type="PackedScene" uid="uid://dgsg6y0swvxlb" path="res://UI/HUD/AbilitySlotContainer/AbilitySlotContainer.tscn" id="12_5jd51"]
 
 [sub_resource type="Curve2D" id="Curve2D_4r1pt"]
 _data = {
@@ -29,6 +31,8 @@ minion_scene = ExtResource("6_oyvgg")
 metadata/_custom_type_script = "uid://cvn7qhk4wsnxx"
 
 [node name="BlueNebula" type="Node" unique_id=2004347515]
+
+[node name="AbilitySlotContainer" parent="." unique_id=1011737586 instance=ExtResource("12_5jd51")]
 
 [node name="MatchManager" parent="." unique_id=374103981 node_paths=PackedStringArray("hero_spawner", "camera_component") instance=ExtResource("2_wiegf")]
 respawn_time = 5.0
@@ -69,7 +73,7 @@ reverse_direction = true
 hero = NodePath("../Ship")
 
 [node name="HeroSpawnerComponent" parent="." unique_id=982651021 node_paths=PackedStringArray("player_controller", "camera") instance=ExtResource("7_yxasx")]
-position = Vector2(9000, 3000)
+position = Vector2(7927, 2666)
 hero_scene = ExtResource("2_4r1pt")
 player_controller = NodePath("../PlayerController")
 camera = NodePath("../CameraComponent")
@@ -77,9 +81,18 @@ camera = NodePath("../CameraComponent")
 [node name="PlayerController" parent="." unique_id=1398685983 node_paths=PackedStringArray("hero") instance=ExtResource("10_5jd51")]
 hero = NodePath("../Ship")
 
+[node name="ShipController" parent="." unique_id=1788282152 node_paths=PackedStringArray("ship", "assigned_lane") instance=ExtResource("11_2wtd1")]
+ship = NodePath("../EnemyShip")
+assigned_lane = NodePath("../MainLane")
+
 [node name="Ship" parent="." unique_id=392969111 instance=ExtResource("2_4r1pt")]
-position = Vector2(9000, 3000)
+position = Vector2(7927, 2666)
 team = 1
+
+[node name="EnemyShip" parent="." unique_id=1451930386 instance=ExtResource("2_4r1pt")]
+position = Vector2(10055, 3302)
+rotation = 3.1415927
+team = 2
 
 [node name="BaseA1" parent="." unique_id=2032666184 instance=ExtResource("10_wiegf")]
 z_index = 5

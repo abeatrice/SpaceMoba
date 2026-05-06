@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://cqyqkq5v8k8jv"]
+
+[ext_resource type="Script" uid="uid://dx4xkymregnf8" path="res://Controllers/ShipController/ShipController.gd" id="1_tnboa"]
+[ext_resource type="Script" uid="uid://bb0t2ovl7wifo" path="res://addons/beehave/nodes/beehave_tree.gd" id="2_x33ly"]
+[ext_resource type="Script" uid="uid://8hn4kne15ac5" path="res://addons/beehave/nodes/composites/selector.gd" id="3_jfowj"]
+[ext_resource type="Script" uid="uid://n6h1ybklkshf" path="res://Controllers/ShipController/StateScripts/Conditions/HealthLessThan_bh.gd" id="4_a30a7"]
+[ext_resource type="Script" uid="uid://cg016dbe7gs1x" path="res://addons/beehave/nodes/composites/sequence.gd" id="4_mmwv8"]
+[ext_resource type="Script" uid="uid://ce8aoxq0iauie" path="res://Controllers/ShipController/StateScripts/Actions/RetreatFromEnemy_bh.gd" id="5_a30a7"]
+[ext_resource type="Script" uid="uid://js7pe0opo6pj" path="res://Controllers/ShipController/StateScripts/Actions/FollowLane_bh.gd" id="7_8vl6b"]
+
+[node name="ShipController" type="Node2D" unique_id=1788282152]
+script = ExtResource("1_tnboa")
+
+[node name="BeehaveTree" type="Node" parent="." unique_id=1579447407 node_paths=PackedStringArray("blackboard", "actor")]
+script = ExtResource("2_x33ly")
+actor_node_path = NodePath("..")
+blackboard = NodePath("@Node@18813")
+actor = NodePath("..")
+metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
+
+[node name="SelectorComposite" type="Node" parent="BeehaveTree" unique_id=2129617801]
+script = ExtResource("3_jfowj")
+metadata/_custom_type_script = "uid://8hn4kne15ac5"
+
+[node name="EmergencyRetreat" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=254116486]
+script = ExtResource("4_mmwv8")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="HealthLessThan30Percent" type="Node" parent="BeehaveTree/SelectorComposite/EmergencyRetreat" unique_id=333576518]
+script = ExtResource("4_a30a7")
+health_percentage = 30
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="RetreatFromEnemy" type="Node" parent="BeehaveTree/SelectorComposite/EmergencyRetreat" unique_id=2004327250]
+script = ExtResource("5_a30a7")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="FollowLane" type="Node" parent="BeehaveTree/SelectorComposite" unique_id=557574922]
+script = ExtResource("7_8vl6b")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"

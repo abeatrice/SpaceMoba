@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://dgsg6y0swvxlb"]
+
+[ext_resource type="Script" uid="uid://c0j3jhpeg5kek" path="res://UI/HUD/AbilitySlotContainer/AbilitySlotContainer.gd" id="1_qilfj"]
+[ext_resource type="PackedScene" uid="uid://bvfin5v40m86r" path="res://UI/HUD/AbilitySlot/AbilitySlot.tscn" id="1_v2ejh"]
+
+[node name="AbilitySlotContainer" type="CanvasLayer" unique_id=1011737586]
+script = ExtResource("1_qilfj")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1630467065]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1653910587]
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="SlotQ" parent="MarginContainer/HBoxContainer" unique_id=1698558629 instance=ExtResource("1_v2ejh")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SlotW" parent="MarginContainer/HBoxContainer" unique_id=1989017436 instance=ExtResource("1_v2ejh")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SlotE" parent="MarginContainer/HBoxContainer" unique_id=1699733470 instance=ExtResource("1_v2ejh")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="SlotR" parent="MarginContainer/HBoxContainer" unique_id=1067672655 instance=ExtResource("1_v2ejh")]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2

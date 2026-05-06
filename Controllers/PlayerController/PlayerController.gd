@@ -107,9 +107,10 @@ func _query_target_at_pos(pos: Vector2) -> Node2D:
 
 func _execute_quick_cast(slot: String):
 	if not hero.cooldowns.is_ready(slot): return
-
-	var mouse_pos = get_global_mouse_position()
-	var target = _query_target_at_pos(mouse_pos)
 	
 	if hero.has_method("use_ability"):
+		is_dragging = false
+
+		var mouse_pos = get_global_mouse_position()
+		var target = _query_target_at_pos(mouse_pos)
 		hero.use_ability(slot, mouse_pos, target)

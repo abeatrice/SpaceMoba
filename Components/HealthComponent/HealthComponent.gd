@@ -18,3 +18,6 @@ func damage(amount: float):
 	if current_health <= 0:
 		is_dying = true
 		died.emit()
+
+func get_health_percent() -> float:
+	return (current_health / max_health) * 100

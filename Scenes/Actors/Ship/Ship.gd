@@ -19,7 +19,7 @@ const plasma_bolt_scene: PackedScene = preload("uid://b3vdi8tcjc6ip")
 
 @onready var team_component: TeamComponent = $TeamComponent
 @onready var health_bar: HealthBarComponent = $HealthBarComponent
-@onready var health_component: HealthComponent = $HealthComponent
+@onready var health: HealthComponent = $HealthComponent
 @onready var targeting: TargetingComponent = $TargetingComponent
 @onready var attack_timer: Timer = $AttackTimer
 @onready var muzzle_marker = $MuzzleMarker
@@ -39,11 +39,11 @@ func _ready():
 	
 	cooldowns.setup_ability("q", 4.0)
 	
-	health_component.died.connect(_on_died)
-	health_component.health_changed.connect(_on_health_changed)
+	health.died.connect(_on_died)
+	health.health_changed.connect(_on_health_changed)
 	
 	health_bar.team = team_component.team
-	health_bar.update_health(health_component.current_health, health_component.max_health)
+	health_bar.update_health(health.current_health, health.max_health)
 
 func _physics_process(delta):
 	var offset = (Vector2.LEFT * 200 + Vector2.DOWN * 100).rotated(global_rotation)
@@ -105,4 +105,4 @@ func _on_died():
 	queue_free()
 
 func _on_health_changed(new_health: float):
-	health_bar.update_health(new_health, health_component.max_health)
+	health_bar.update_health(new_health, health.max_health)
