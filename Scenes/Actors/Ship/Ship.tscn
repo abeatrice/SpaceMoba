@@ -16,12 +16,16 @@
 [ext_resource type="Script" uid="uid://i1i51cs33s87" path="res://Scenes/Actors/Ship/States/CastState.gd" id="8_wab6d"]
 [ext_resource type="PackedScene" uid="uid://daymix30s8e8h" path="res://Components/SpriteOutlineComponent/SpriteOutlineComponent.tscn" id="9_tvw8l"]
 [ext_resource type="Texture2D" uid="uid://bco8g7fubud8a" path="res://Scenes/Actors/Ship/Ship128x128.png" id="13_tvw8l"]
+[ext_resource type="PackedScene" uid="uid://cw2xxrcwadg68" path="res://Components/DetectorComponent/DetectorComponent.tscn" id="16_2nsm4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ovmfj"]
 radius = 66.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wab6d"]
 radius = 42.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b7cd3"]
+radius = 512.0
 
 [node name="Ship" type="CharacterBody2D" unique_id=392969111 groups=["player"]]
 z_index = 5
@@ -74,11 +78,18 @@ offset = Vector2(0, -72)
 
 [node name="TargetingComponent" parent="." unique_id=1786100363 instance=ExtResource("6_el4xe")]
 
+[node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("16_2nsm4")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=726974039]
+shape = SubResource("CircleShape2D_b7cd3")
+
+[node name="TargetingComponent2" parent="." unique_id=1122909305 instance=ExtResource("6_el4xe")]
+
 [node name="AttackTimer" type="Timer" parent="." unique_id=87743990]
 one_shot = true
 
-[node name="MuzzleMarker" type="Marker2D" parent="." unique_id=2110633799]
-position = Vector2(41, 0)
-
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=3766368]
 texture = ExtResource("13_tvw8l")
+
+[node name="MuzzleMarker" type="Marker2D" parent="." unique_id=2110633799]
+position = Vector2(41, 0)

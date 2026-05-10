@@ -7,9 +7,8 @@ var current_target: Node2D = null
 
 func _ready():
 	if detector:
-		detector.target_found.connect(_on_target_found)
-		detector.target_lost.connect(_on_target_lost)
-	
+		detector.targets_updated.connect(_refresh_priority_target)
+
 func is_target_valid() -> bool:
 	return is_instance_valid(current_target)
 
@@ -69,5 +68,28 @@ func _get_dist_to_polygon_edge(points: PackedVector2Array, trans: Transform2D) -
 
 	return min_dist
 
-func _on_target_found(target): current_target = target
-func _on_target_lost(_target): current_target = null
+func _refresh_priority_target():
+	var potential_targets = detector.get_targets()
+	
+	if potential_targets.is_empty():
+		current_target = null
+		return
+	
+	if is_instance_valid(current_target) and potential_targets.has(current_target):
+		return
+		
+	potential_targets.sort_custom(_sort_by_priority)
+	current_target = potential_targets[0]
+	
+func _sort_by_priority(a, b) -> bool:
+	var a_is_minion = a.is_in_group("minions")
+	var b_is_minion = b.is_in_group("minions")
+	
+	# minion comes first
+	if a_is_minion and not b_is_minion:
+		return true
+	if not a_is_minion and b_is_minion:
+		return false
+	
+	# target closest
+	return global_position.distance_to(a.global_position) < global_position.distance_to(b.global_position)

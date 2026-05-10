@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 BeehaveGlobalMetrics="*uid://c3ktl6ontsdt7"
 BeehaveGlobalDebugger="*uid://bl3ma400hpvsh"
+DebugDraw="*uid://bkaq6kaq1kf0f"
 
 [display]
 
@@ -43,6 +44,8 @@ enabled=PackedStringArray("res://addons/beehave/plugin.cfg")
 team_a="Team A"
 team_b="Team B"
 player="player"
+minions="Minions"
+forts="Forts"
 
 [input]
 

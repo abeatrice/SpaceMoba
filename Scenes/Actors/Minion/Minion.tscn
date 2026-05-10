@@ -26,7 +26,7 @@ radius = 32.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_da52b"]
 radius = 48.0
 
-[node name="Minion" type="CharacterBody2D" unique_id=209382350]
+[node name="Minion" type="CharacterBody2D" unique_id=209382350 groups=["minions"]]
 z_index = 2
 motion_mode = 1
 script = ExtResource("1_bb0ru")

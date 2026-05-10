@@ -29,7 +29,7 @@ var colors = {
 			var detector = parent.get_node_or_null("EnemiesDetectorComponent")
 			sync_team_data(parent, detector)
 
-func _manage_groups(parent: Node2D, detector: DetectorComponent = null):
+func _manage_groups(parent: Node2D):
 	parent.remove_from_group("team_a")
 	parent.remove_from_group("team_b")
 	
@@ -38,11 +38,8 @@ func _manage_groups(parent: Node2D, detector: DetectorComponent = null):
 	elif team == Team.B:
 		parent.add_to_group("team_b")
 		
-	if detector:
-		detector.target_group = get_enemy_group()
-
 func sync_team_data(parent: Node2D, detector: DetectorComponent = null):
-	_manage_groups(parent, detector)
+	_manage_groups(parent)
 
 	var hurtbox: HurtboxComponent = parent.get_node_or_null("HurtboxComponent")
 	

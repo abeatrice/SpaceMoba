@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://ci2bgmx8dnlvq"]
+
+[ext_resource type="Script" uid="uid://js7pe0opo6pj" path="res://Controllers/ShipController/Behaviors/Actions/FollowLane/FollowLane.gd" id="1_jaiia"]
+
+[node name="FollowLane" type="Node" unique_id=373315465]
+script = ExtResource("1_jaiia")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
