@@ -15,14 +15,15 @@ signal destination_reached
 func _ready():
 	parent = get_parent() as CharacterBody2D
 	target_position = parent.global_position
-	
+
 func move_to(pos: Vector2):
 	target_position = pos
 	is_moving = true
-	
+
 func stop():
 	is_moving = false
 	if parent:
+		target_position = parent.global_position
 		parent.velocity = Vector2.ZERO
 
 func _physics_process(delta):
@@ -42,19 +43,3 @@ func _physics_process(delta):
 	parent.velocity = parent.velocity.lerp(desired_velocity, acceleration * delta)
 	
 	parent.move_and_slide()
-	
-	#var distance = ship.global_position.distance_to(ship.target_position)
-	#var direction = ship.global_position.direction_to(ship.target_position)
-	#
-	#if distance > ship.stopping_distance:
-		#var target_velocity = direction * ship.speed
-		#ship.velocity = ship.velocity.lerp(target_velocity, 10.0 * delta)
-	#else:
-		#ship.velocity = Vector2.ZERO
-		#transitioned.emit("idlestate")
-	#
-	#if distance > ship.rotation_stopping_distance:
-		#ship.rotation = rotate_toward(ship.rotation, direction.angle(), ship.turn_speed * delta)
-#
-	#ship.move_and_slide()
-#

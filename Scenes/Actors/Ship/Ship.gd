@@ -7,7 +7,7 @@ const click_marker_scene: PackedScene = preload("uid://dk1maojo402u8")
 const plasma_bolt_scene: PackedScene = preload("uid://b3vdi8tcjc6ip")
 
 @export var speed: float = 400.0
-@export	var attack_range: float = 128.0
+@export	var attack_range: float = 256.0
 @export var projectile_scene: PackedScene
 @export var projectile_damage: float = 50.0
 @export var team: TeamComponent.Team = TeamComponent.Team.NONE:
@@ -87,6 +87,20 @@ func spawn_click_marker(pos: Vector2, is_attack: bool):
 	get_tree().current_scene.add_child(marker)
 	marker.global_position = pos
 	marker.setup(is_attack)
+
+func command_attack(target_node: Node2D):
+	targeting.current_target = target_node
+	if not in_attack_range():
+		movement.move_to(target_node.global_position)
+		state.transition("movestate", {"next_state": "attackstate"})
+	else:
+		state.transition("attackstate")
+
+func in_attack_range() -> bool:
+	if not targeting.is_target_valid(): return false
+	var calculated_dist = targeting.get_dist_to_target_edge()
+	print("Dist: ", calculated_dist, " | Range: ", attack_range)
+	return calculated_dist <= attack_range
 
 func _fire_projectile():
 	var p = projectile_scene.instantiate()

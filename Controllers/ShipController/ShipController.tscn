@@ -8,7 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://ci2bgmx8dnlvq" path="res://Controllers/ShipController/Behaviors/Actions/FollowLane/FollowLane.tscn" id="7_8vl6b"]
 [ext_resource type="Script" uid="uid://dbbclpmnkwu3r" path="res://Controllers/ShipController/Behaviors/Conditions/HasTarget.gd" id="7_llwhf"]
 [ext_resource type="Script" uid="uid://b8y0qa4n2dgi6" path="res://Controllers/ShipController/Behaviors/Actions/PushWithWave.gd" id="8_e5ssx"]
-[ext_resource type="Script" uid="uid://gab50c2orwuy" path="res://Controllers/ShipController/Behaviors/Actions/AttackTarget.gd" id="8_gtk1b"]
+[ext_resource type="Script" uid="uid://ytn50olm0nco" path="res://Controllers/ShipController/Behaviors/Conditions/IsAbilityReady.gd" id="9_7muit"]
+[ext_resource type="Script" uid="uid://cv54gocxy01in" path="res://Controllers/ShipController/Behaviors/Actions/FireAbility.gd" id="10_u8gk1"]
+[ext_resource type="Script" uid="uid://bqha81ftpnx1j" path="res://Controllers/ShipController/Behaviors/Conditions/CanAttack.gd" id="12_5api6"]
+[ext_resource type="Script" uid="uid://80k5p0fd5yl3" path="res://Controllers/ShipController/HasMovementClick.gd" id="13_o5jq2"]
+[ext_resource type="Script" uid="uid://7hf4be0q1aqd" path="res://Controllers/ShipController/Behaviors/Actions/PerformAttack.gd" id="13_v0bgq"]
+[ext_resource type="Script" uid="uid://bdhagdltfcv6g" path="res://Controllers/ShipController/NavigateToClick.gd" id="14_o5jq2"]
+[ext_resource type="Script" uid="uid://m32noimb5woh" path="res://Controllers/ShipController/PickNewMovementClick.gd" id="15_o5jq2"]
 
 [node name="ShipController" type="Node2D" unique_id=1788282152]
 script = ExtResource("1_tnboa")
@@ -16,39 +22,79 @@ script = ExtResource("1_tnboa")
 [node name="BeehaveTree" type="Node" parent="." unique_id=1579447407 node_paths=PackedStringArray("blackboard", "actor")]
 script = ExtResource("2_x33ly")
 actor_node_path = NodePath("..")
-blackboard = NodePath("@Node@37752")
+blackboard = NodePath("@Node@18813")
 actor = NodePath("..")
 metadata/_custom_type_script = "uid://bb0t2ovl7wifo"
 
-[node name="SelectorReactiveComposite" type="Node" parent="BeehaveTree" unique_id=432043246]
+[node name="SelectLaneBehaviorReactive" type="Node" parent="BeehaveTree" unique_id=432043246]
 script = ExtResource("3_mmwv8")
 metadata/_custom_type_script = "uid://cw22yurt5l74k"
 
-[node name="EmergencyRetreat" type="Node" parent="BeehaveTree/SelectorReactiveComposite" unique_id=254116486]
+[node name="EmergencyRetreat" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive" unique_id=254116486]
 script = ExtResource("4_mmwv8")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="HealthLessThan30Percent" type="Node" parent="BeehaveTree/SelectorReactiveComposite/EmergencyRetreat" unique_id=333576518]
+[node name="HealthLessThan30Percent" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/EmergencyRetreat" unique_id=333576518]
 script = ExtResource("4_a30a7")
 health_percentage = 30
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="FollowLaneAwayFromEnemy" parent="BeehaveTree/SelectorReactiveComposite/EmergencyRetreat" unique_id=373315465 instance=ExtResource("7_8vl6b")]
+[node name="FollowLaneAwayFromEnemy" parent="BeehaveTree/SelectLaneBehaviorReactive/EmergencyRetreat" unique_id=373315465 instance=ExtResource("7_8vl6b")]
 move_direction = 1
 
-[node name="HasTargetAttack" type="Node" parent="BeehaveTree/SelectorReactiveComposite" unique_id=1868878349]
+[node name="Combat" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive" unique_id=1868878349]
 script = ExtResource("4_mmwv8")
 metadata/_custom_type_script = "uid://cg016dbe7gs1x"
 
-[node name="HasTarget" type="Node" parent="BeehaveTree/SelectorReactiveComposite/HasTargetAttack" unique_id=620453345]
+[node name="HasTarget" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat" unique_id=620453345]
 script = ExtResource("7_llwhf")
 metadata/_custom_type_script = "uid://cbnbvj8prv63i"
 
-[node name="AttackTarget" type="Node" parent="BeehaveTree/SelectorReactiveComposite/HasTargetAttack" unique_id=536402703]
-script = ExtResource("8_gtk1b")
+[node name="SelectCombatBehaviorReactive" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat" unique_id=1782907654]
+script = ExtResource("3_mmwv8")
+metadata/_custom_type_script = "uid://cw22yurt5l74k"
+
+[node name="UseAbilityQ" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive" unique_id=880838522]
+script = ExtResource("4_mmwv8")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="IsAbilityReady" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/UseAbilityQ" unique_id=890423493]
+script = ExtResource("9_7muit")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="FireAbilityQ" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/UseAbilityQ" unique_id=95384004]
+script = ExtResource("10_u8gk1")
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"
 
-[node name="PushWithWave" type="Node" parent="BeehaveTree/SelectorReactiveComposite" unique_id=577979190]
+[node name="AttackAction" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive" unique_id=508984182]
+script = ExtResource("4_mmwv8")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="CanAttack" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/AttackAction" unique_id=1280947583]
+script = ExtResource("12_5api6")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="PerformAttack" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/AttackAction" unique_id=1192194833]
+script = ExtResource("13_v0bgq")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="MoveAction" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive" unique_id=211645713]
+script = ExtResource("4_mmwv8")
+metadata/_custom_type_script = "uid://cg016dbe7gs1x"
+
+[node name="HasMovementClick" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/MoveAction" unique_id=854214117]
+script = ExtResource("13_o5jq2")
+metadata/_custom_type_script = "uid://cbnbvj8prv63i"
+
+[node name="NavigateToClick" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive/MoveAction" unique_id=1692663025]
+script = ExtResource("14_o5jq2")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="PickNewMovementClick" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive/Combat/SelectCombatBehaviorReactive" unique_id=359531942]
+script = ExtResource("15_o5jq2")
+metadata/_custom_type_script = "uid://cv74jjdrwevpr"
+
+[node name="PushWithWave" type="Node" parent="BeehaveTree/SelectLaneBehaviorReactive" unique_id=577979190]
 script = ExtResource("8_e5ssx")
 max_lateral_offset = 200.0
 metadata/_custom_type_script = "uid://cv74jjdrwevpr"

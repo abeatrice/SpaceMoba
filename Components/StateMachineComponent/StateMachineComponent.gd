@@ -30,9 +30,14 @@ func _physics_process(delta: float) -> void:
 
 func transition(new_state_name: String, msg: Dictionary = {}) ->  void:
 	var new_state = states.get(new_state_name.to_lower())
-	if !new_state or new_state == current_state: return
-	
-	if current_state: current_state.exit()
+	if !new_state: return
+
+	if new_state == current_state:
+		current_state.enter(msg)
+		return
+
+	if current_state: 
+		current_state.exit()
 	
 	current_state = new_state
 	current_state.enter(msg)
@@ -41,3 +46,6 @@ func get_current_state_name() -> String:
 	if current_state:
 		return current_state.name.to_lower()
 	return ""
+
+func is_current_state(state_name: String) -> bool:
+	return get_current_state_name() == state_name.to_lower()

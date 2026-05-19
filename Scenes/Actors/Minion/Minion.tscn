@@ -45,7 +45,7 @@ script = ExtResource("4_wgy48")
 script = ExtResource("5_wgy48")
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_a7136")]
-max_health = 250.0
+max_health = 1000.0
 
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("4_da52b")]
 
@@ -57,7 +57,6 @@ hover_area = NodePath("../HurtboxComponent")
 sprite = NodePath("../Sprite2D")
 
 [node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("2_8rcmy")]
-target_group = "team_a"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=84961796]
 shape = SubResource("CircleShape2D_8rcmy")

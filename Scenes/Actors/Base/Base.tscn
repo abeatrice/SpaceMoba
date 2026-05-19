@@ -45,7 +45,7 @@ hover_area = NodePath("../HurtboxComponent")
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_vk0q6")]
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_d0mm7")]
-max_health = 1000.0
+max_health = 20000.0
 
 [node name="HealthBarComponent" parent="." unique_id=1487073155 instance=ExtResource("6_1cv3e")]
 z_index = 10
@@ -63,7 +63,6 @@ health_component = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_hnoul")
 
 [node name="EnemiesDetectorComponent" parent="." unique_id=1614452799 instance=ExtResource("3_qctcw")]
-target_group = "team_a"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesDetectorComponent" unique_id=2098343024]
 shape = SubResource("CircleShape2D_qctcw")

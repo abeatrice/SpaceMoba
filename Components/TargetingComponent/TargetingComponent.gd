@@ -18,7 +18,11 @@ func get_dist_to_target_edge() -> float:
 	var hurtbox = current_target.get_node_or_null("HurtboxComponent")
 	if not hurtbox: return global_position.distance_to(current_target.global_position)
 	
-	var shape = hurtbox.shape_owner_get_shape(0,0)
+	var collision_shap = hurtbox.get_node_or_null("CollisionShape2D")
+	if not collision_shap or not collision_shap.shape:
+		return global_position.distance_to(current_target.global_position)
+	
+	var shape = collision_shap.shape
 	var trans = hurtbox.global_transform
 	
 	if shape is CircleShape2D:

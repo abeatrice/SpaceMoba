@@ -59,13 +59,11 @@ curve = SubResource("Curve2D_4r1pt")
 [node name="PlayerMainLaneMinionSpawner" parent="." unique_id=1132137132 node_paths=PackedStringArray("target_path") instance=ExtResource("7_jpt7o")]
 position = Vector2(8000, 3000)
 wave_data = SubResource("Resource_akqbd")
-wave_interval = 5.0
 target_path = NodePath("../MainLane")
 
 [node name="EnemyMainLaneMinionSpawner" parent="." unique_id=1523072494 node_paths=PackedStringArray("target_path") instance=ExtResource("7_jpt7o")]
 position = Vector2(10000, 3000)
 wave_data = SubResource("Resource_yxasx")
-wave_interval = 5.0
 target_path = NodePath("../MainLane")
 reverse_direction = true
 

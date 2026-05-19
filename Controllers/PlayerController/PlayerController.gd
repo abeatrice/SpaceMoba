@@ -18,8 +18,7 @@ func _input(event):
 		if target:
 			is_dragging = false
 			_set_new_selection(target)
-			hero.targeting.current_target = target
-			hero.state.transition("attackstate")
+			hero.command_attack(target)
 			hero.spawn_click_marker(click_pos, true)
 		else:
 			is_dragging = true
@@ -62,15 +61,15 @@ func _clear_selection():
 		_toggle_outline(current_selected_target, false)
 	current_selected_target = null
 
-func _toggle_outline(target: Node2D, val: bool):
+func _toggle_outline(target: Node2D, is_targeted: bool):
 	var outline = target.find_child("HoverOutlineComponent") as HoverOutlineComponent
 	if outline:
-		outline.is_targeted = val
+		outline.is_targeted = is_targeted
 		outline.queue_redraw()
 
 	var sprite_outline = target.find_child("SpriteOutlineComponent") as SpriteOutlineComponent
 	if sprite_outline:
-		sprite_outline.is_targeted = val
+		sprite_outline.is_targeted = is_targeted
 		sprite_outline.update_shader()
 
 func _move_to_mouse():

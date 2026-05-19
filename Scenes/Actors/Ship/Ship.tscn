@@ -31,7 +31,6 @@ radius = 512.0
 z_index = 5
 motion_mode = 1
 script = ExtResource("1_fapo8")
-attack_range = 256.0
 projectile_scene = ExtResource("2_4kg1j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1478932363]
@@ -59,7 +58,7 @@ script = ExtResource("8_wab6d")
 [node name="TeamComponent" parent="." unique_id=852586776 instance=ExtResource("2_cx01u")]
 
 [node name="HealthComponent" parent="." unique_id=173059561 instance=ExtResource("3_uin23")]
-max_health = 1000.0
+max_health = 5000.0
 
 [node name="SpriteOutlineComponent" parent="." unique_id=1978378427 node_paths=PackedStringArray("hover_area", "sprite") instance=ExtResource("9_tvw8l")]
 hover_area = NodePath("../HurtboxComponent")
